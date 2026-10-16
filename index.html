@@ -1,14 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <meta name="apple-mobile-web-app-title" content="PHASE - II">
-<meta name="application-name" content="PHASE - II">
-<meta name="theme-color" content="#090d16">
-<link rel="icon" type="image/svg+xml" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Phase 2 — Revision Companion</title>
+  <title>Phase 2 — Minimal Revision Companion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -23,13 +18,13 @@
       --text-muted: #94a3b8;
       --accent: #38bdf8;
       --accent-soft: rgba(56, 189, 248, 0.12);
-      --morning-grad: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(99, 102, 241, 0.05));
-      --evening-grad: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0.05));
-      --fat-grad: linear-gradient(135deg, rgba(52, 211, 153, 0.12), rgba(16, 185, 129, 0.05));
+      --morning-grad: linear-gradient(135deg, rgba(56, 189, 248, 0.14), rgba(99, 102, 241, 0.08));
+      --evening-grad: linear-gradient(135deg, rgba(168, 85, 247, 0.14), rgba(236, 72, 153, 0.08));
       --morning-accent: #38bdf8;
       --evening-accent: #c084fc;
-      --fat-accent: #34d399;
       --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
       --shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
     }
 
@@ -43,13 +38,13 @@
       --text-muted: #6b635b;
       --accent: #b45309;
       --accent-soft: rgba(180, 83, 9, 0.1);
-      --morning-grad: linear-gradient(135deg, rgba(217, 119, 6, 0.1), rgba(245, 158, 11, 0.04));
-      --evening-grad: linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(20, 184, 166, 0.04));
-      --fat-grad: linear-gradient(135deg, rgba(21, 128, 61, 0.1), rgba(34, 197, 94, 0.04));
+      --morning-grad: linear-gradient(135deg, rgba(217, 119, 6, 0.12), rgba(245, 158, 11, 0.05));
+      --evening-grad: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(20, 184, 166, 0.05));
       --morning-accent: #b45309;
       --evening-accent: #0f766e;
-      --fat-accent: #15803d;
       --success: #15803d;
+      --warning: #b45309;
+      --danger: #dc2626;
       --shadow: 0 10px 28px rgba(28, 25, 23, 0.08);
     }
 
@@ -73,14 +68,15 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Minimal Top Header */
+    /* Top Minimal Header */
     .app-header {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
-      padding: 20px 20px 10px;
+      padding: 16px 20px 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
     }
 
     .live-clock-wrap {
@@ -90,17 +86,23 @@
     }
 
     .live-date {
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.06em;
       color: var(--text-muted);
     }
 
     .live-time {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       color: var(--text);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .icon-btn, .pill-btn {
@@ -109,7 +111,7 @@
       color: var(--text);
       padding: 8px 13px;
       border-radius: 999px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 500;
       cursor: pointer;
       display: inline-flex;
@@ -133,18 +135,18 @@
       font-weight: 600;
     }
 
-    /* Countdown Strip */
+    /* Live Next Test Countdown Strip */
     .countdown-banner {
-      max-width: 720px;
-      margin: 4px auto 18px;
+      max-width: 760px;
+      margin: 6px auto 12px;
       padding: 0 20px;
     }
 
     .countdown-inner {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 11px 16px;
+      border-radius: 16px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -156,40 +158,80 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
     }
 
     .pulse-dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: var(--success);
-      box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.18);
+      box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.2);
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.35; }
+      50% { opacity: 0.4; }
     }
 
     .countdown-timer {
-      font-size: 0.86rem;
+      font-size: 0.92rem;
       font-weight: 600;
       color: var(--accent);
       background: var(--accent-soft);
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 999px;
+    }
+
+    /* Swipe Navigation Bar */
+    .tabs-nav {
+      max-width: 760px;
+      margin: 0 auto 14px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tabs-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-pill {
+      flex: 1;
+      text-align: center;
+      white-space: nowrap;
+      padding: 9px 14px;
+      border-radius: 12px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-pill.active {
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
 
     /* Horizontal Swipe Viewport */
     .swipe-viewport {
-      max-width: 720px;
+      max-width: 760px;
       margin: 0 auto;
       overflow: hidden;
       position: relative;
-      padding-bottom: 72px;
+      padding-bottom: 60px;
     }
 
     .swipe-track {
@@ -205,65 +247,83 @@
       flex-shrink: 0;
     }
 
-    /* Tab 0: Three Clean Cards Stack */
-    .cards-stack {
+    /* Date Controls on Tab 1 */
+    .focus-header {
       display: flex;
-      flex-direction: column;
-      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
-    .top-cards-grid {
+    .focus-title-group h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .focus-title-group p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .quick-date-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    /* TWO BIG BUTTONS (Morning & Evening Hero Cards) */
+    .big-buttons-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 16px;
+      margin-bottom: 18px;
     }
 
-    @media (max-width: 580px) {
-      .top-cards-grid {
+    @media (max-width: 600px) {
+      .big-buttons-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .session-card {
+    .session-big-btn {
       text-align: left;
-      border-radius: 20px;
-      padding: 22px;
+      border-radius: 24px;
+      padding: 26px 24px;
       border: 1px solid var(--border);
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 185px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      min-height: 230px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .session-card.fat-card {
-      min-height: 140px;
-    }
-
-    .session-card:hover {
-      transform: translateY(-2px);
+    .session-big-btn:hover {
+      transform: translateY(-3px);
       box-shadow: var(--shadow);
     }
 
-    .session-card:active {
-      transform: scale(0.99);
+    .session-big-btn:active {
+      transform: scale(0.985);
     }
 
-    .session-card.morning {
+    .session-big-btn.morning {
       background: var(--morning-grad), var(--surface);
     }
 
-    .session-card.evening {
+    .session-big-btn.evening {
       background: var(--evening-grad), var(--surface);
     }
 
-    .session-card.fat {
-      background: var(--fat-grad), var(--surface);
-    }
-
-    .session-card.disabled-slot {
-      opacity: 0.6;
+    .session-big-btn.disabled-slot {
+      opacity: 0.65;
     }
 
     .slot-top {
@@ -274,39 +334,43 @@
     }
 
     .slot-badge {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      padding: 4px 10px;
+      padding: 5px 11px;
       border-radius: 999px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
     }
 
-    .morning .slot-badge { color: var(--morning-accent); }
-    .evening .slot-badge { color: var(--evening-accent); }
-    .fat .slot-badge { color: var(--fat-accent); }
+    .morning .slot-badge {
+      color: var(--morning-accent);
+    }
+
+    .evening .slot-badge {
+      color: var(--evening-accent);
+    }
 
     .slot-time {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
     }
 
     .slot-middle {
-      margin: 16px 0;
+      margin: 22px 0;
     }
 
     .slot-subject {
-      font-size: 1.22rem;
+      font-size: 1.38rem;
       font-weight: 700;
       line-height: 1.25;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       color: var(--text);
     }
 
     .slot-preview {
-      font-size: 0.84rem;
+      font-size: 0.87rem;
       color: var(--text-muted);
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -319,64 +383,51 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.76rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      padding-top: 10px;
+      padding-top: 12px;
       border-top: 1px solid var(--border);
-      color: var(--text-muted);
+      color: var(--text);
     }
 
-    /* Subtle Bottom Tab Pill Indicator */
-    .bottom-pill-nav {
-      position: fixed;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      padding: 7px 14px;
-      border-radius: 999px;
+    /* Utility Action Row under Big Buttons */
+    .day-utility-bar {
       display: flex;
       align-items: center;
-      gap: 8px;
-      z-index: 50;
-      box-shadow: var(--shadow);
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 16px;
     }
 
-    .nav-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--text-muted);
-      opacity: 0.35;
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s ease;
+    .swipe-hint {
+      text-align: center;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 18px;
+      opacity: 0.75;
     }
 
-    .nav-dot.active {
-      width: 22px;
-      opacity: 1;
-      background: var(--accent);
-    }
-
-    /* Tab 1: Schedule & Date Switcher */
+    /* Tab 2: Minimalist Timeline List */
     .filter-row {
       display: flex;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
 
     .search-input {
       flex: 1;
-      min-width: 150px;
+      min-width: 180px;
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 9px 13px;
+      padding: 10px 14px;
       border-radius: 12px;
-      font-size: 0.84rem;
+      font-size: 0.86rem;
       outline: none;
     }
 
@@ -384,7 +435,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      max-height: 66vh;
+      max-height: 68vh;
       overflow-y: auto;
       padding-right: 4px;
     }
@@ -393,7 +444,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 12px 15px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -406,21 +457,21 @@
       background: var(--surface-hover);
     }
 
-    .timeline-item.is-selected {
+    .timeline-item.is-today {
       border-color: var(--accent);
     }
 
     .tl-date {
-      min-width: 90px;
+      min-width: 92px;
     }
 
     .tl-date strong {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
     }
 
     .tl-date span {
-      font-size: 0.73rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
     }
 
@@ -432,15 +483,15 @@
     }
 
     .mini-chip {
-      font-size: 0.74rem;
-      padding: 3px 9px;
+      font-size: 0.76rem;
+      padding: 4px 10px;
       border-radius: 8px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       color: var(--text);
     }
 
-    /* Minimal Cards for Tabs 2 & 3 */
+    /* Cards for Tab 3 & Tab 4 */
     .minimal-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -450,12 +501,12 @@
     }
 
     .minimal-card h3 {
-      font-size: 0.96rem;
+      font-size: 1rem;
       margin-bottom: 6px;
     }
 
     .minimal-card p {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       color: var(--text-muted);
       line-height: 1.5;
     }
@@ -467,22 +518,23 @@
       flex-wrap: wrap;
     }
 
+    /* Timer Widget */
     .timer-display {
-      font-size: 2.6rem;
+      font-size: 2.75rem;
       font-weight: 700;
       text-align: center;
-      margin: 14px 0;
+      margin: 16px 0;
       letter-spacing: 0.04em;
     }
 
     .timer-controls {
       display: flex;
       justify-content: center;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    /* Modals */
+    /* Slide-Up Modal / Drawer */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -504,16 +556,16 @@
       border: 1px solid var(--border);
       border-radius: 24px;
       width: 100%;
-      max-width: 620px;
-      max-height: 86vh;
+      max-width: 640px;
+      max-height: 88vh;
       overflow-y: auto;
-      padding: 22px;
+      padding: 24px;
       box-shadow: var(--shadow);
-      animation: slideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: slideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes slideUp {
-      from { transform: translateY(24px); opacity: 0; }
+      from { transform: translateY(30px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
 
@@ -522,33 +574,33 @@
       align-items: flex-start;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .checklist-group {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      margin: 12px 0;
+      margin: 14px 0;
     }
 
     .check-item {
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      padding: 10px 13px;
+      padding: 11px 14px;
       border-radius: 12px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       line-height: 1.45;
     }
 
     .check-item input {
       margin-top: 3px;
       accent-color: var(--accent);
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
 
     .check-item.done span {
@@ -560,16 +612,16 @@
       background: var(--accent-soft);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 11px 13px;
-      font-size: 0.78rem;
+      padding: 12px 14px;
+      font-size: 0.8rem;
       line-height: 1.5;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .section-divider {
       height: 1px;
       background: var(--border);
-      margin: 14px 0;
+      margin: 16px 0;
     }
 
     .vault-item {
@@ -577,29 +629,34 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 9px 12px;
+      padding: 10px 12px;
       border-radius: 10px;
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       margin-top: 8px;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Minimal Header: Today's Date, Live Clock, Hidden Settings Button -->
+  <!-- Top Bar: Real-Life Clock, Theme Toggle & Login -->
   <header class="app-header">
     <div class="live-clock-wrap">
-      <div class="live-date" id="realDateDisplay">Loading...</div>
+      <div class="live-date" id="realDateDisplay">Loading date...</div>
       <div class="live-time mono" id="realTimeDisplay">--:--:--</div>
     </div>
-    <button class="icon-btn" id="settingsBtn" title="Settings & Preferences">
-      ⚙️
-    </button>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggleBtn" title="Switch Dark / Warm Cream Theme">
+        <span id="themeIcon">☀️ Cream</span>
+      </button>
+      <button class="pill-btn" id="loginBtn">
+        <span id="userStatusText">👤 Sign In</span>
+      </button>
+    </div>
   </header>
 
-  <!-- Live Next Test Countdown -->
+  <!-- Live Next Test Countdown Strip -->
   <section class="countdown-banner">
     <div class="countdown-inner">
       <div class="countdown-label">
@@ -610,89 +667,111 @@
     </div>
   </section>
 
-  <!-- Horizontal Swipeable Viewport -->
+  <!-- Minimalist Swipe Tabs Bar -->
+  <nav class="tabs-nav">
+    <button class="tab-pill active" onclick="goToTab(0)">1. Focus</button>
+    <button class="tab-pill" onclick="goToTab(1)">2. Schedule</button>
+    <button class="tab-pill" onclick="goToTab(2)">3. Drive & Patterns</button>
+    <button class="tab-pill" onclick="goToTab(3)">4. Timer & Vault</button>
+  </nav>
+
+  <!-- Horizontal Swipeable Container -->
   <main class="swipe-viewport" id="swipeViewport">
     <div class="swipe-track" id="swipeTrack">
 
-      <!-- TAB 0: STARTING PAGE (ONLY 3 CLEAN CARDS: MORNING, EVENING, FAT) -->
+      <!-- TAB 1: DAILY FOCUS (TOMORROW'S PLAN BY DEFAULT + TWO BIG BUTTONS) -->
       <section class="swipe-slide">
-        <div class="cards-stack">
-          <div class="top-cards-grid">
-            <!-- Morning Test Card -->
-            <button class="session-card morning" id="morningBigBtn" onclick="openPortionSheet('morning')">
-              <div class="slot-top">
-                <span class="slot-badge">☀️ Morning Test</span>
-                <span class="slot-time mono" id="morningTimeLabel">09:00 AM</span>
-              </div>
-              <div class="slot-middle">
-                <div class="slot-subject" id="morningSubject">Loading...</div>
-                <div class="slot-preview" id="morningPreview">Tap to view portion</div>
-              </div>
-              <div class="slot-bottom">
-                <span id="morningProgressText">0/0 Completed</span>
-                <span>→</span>
-              </div>
-            </button>
-
-            <!-- Evening Test Card -->
-            <button class="session-card evening" id="eveningBigBtn" onclick="openPortionSheet('evening')">
-              <div class="slot-top">
-                <span class="slot-badge">🌙 Evening Test</span>
-                <span class="slot-time mono" id="eveningTimeLabel">02:30 PM</span>
-              </div>
-              <div class="slot-middle">
-                <div class="slot-subject" id="eveningSubject">Loading...</div>
-                <div class="slot-preview" id="eveningPreview">Tap to view portion</div>
-              </div>
-              <div class="slot-bottom">
-                <span id="eveningProgressText">0/0 Completed</span>
-                <span>→</span>
-              </div>
-            </button>
+        <div class="focus-header">
+          <div class="focus-title-group">
+            <h1 id="focusHeading">Tomorrow's Plan</h1>
+            <p id="focusSubDate">Saturday, 17 Oct 2026</p>
           </div>
+          <div class="quick-date-pills">
+            <button class="pill-btn" id="btnToday" onclick="setQuickDate('today')">Today</button>
+            <button class="pill-btn active" id="btnTomorrow" onclick="setQuickDate('tomorrow')">Tomorrow</button>
+            <button class="pill-btn" id="btnDay1" onclick="setQuickDate('2026-10-22')">Oct 22 (Day 1)</button>
+            <button class="icon-btn" onclick="stepDate(-1)" title="Previous Day">←</button>
+            <button class="icon-btn" onclick="stepDate(1)" title="Next Day">→</button>
+          </div>
+        </div>
 
-          <!-- FAT Exam & Funwork Card -->
-          <button class="session-card fat fat-card" id="fatBigBtn" onclick="openPortionSheet('fat')">
+        <!-- TWO BIG HERO BUTTONS -->
+        <div class="big-buttons-grid">
+          <button class="session-big-btn morning" id="morningBigBtn" onclick="openPortionSheet('morning')">
             <div class="slot-top">
-              <span class="slot-badge">⚡ FAT Exam & Funwork</span>
-              <span class="slot-time mono" id="fatTimeLabel">30 Min • 20M</span>
+              <span class="slot-badge">☀️ Morning Test</span>
+              <span class="slot-time mono" id="morningTimeLabel">09:00 AM</span>
             </div>
             <div class="slot-middle">
-              <div class="slot-subject" id="fatSubject">Loading...</div>
-              <div class="slot-preview" id="fatPreview">Tap to view FAT & Funwork portion</div>
+              <div class="slot-subject" id="morningSubject">Loading...</div>
+              <div class="slot-preview" id="morningPreview">Tap to view portion details</div>
             </div>
             <div class="slot-bottom">
-              <span id="fatProgressText">View Portion & Checklist</span>
+              <span id="morningProgressText">View Portion & Checklist</span>
+              <span>→</span>
+            </div>
+          </button>
+
+          <button class="session-big-btn evening" id="eveningBigBtn" onclick="openPortionSheet('evening')">
+            <div class="slot-top">
+              <span class="slot-badge">🌙 Evening Test</span>
+              <span class="slot-time mono" id="eveningTimeLabel">02:30 PM</span>
+            </div>
+            <div class="slot-middle">
+              <div class="slot-subject" id="eveningSubject">Loading...</div>
+              <div class="slot-preview" id="eveningPreview">Tap to view portion details</div>
+            </div>
+            <div class="slot-bottom">
+              <span id="eveningProgressText">View Portion & Checklist</span>
               <span>→</span>
             </div>
           </button>
         </div>
+
+        <!-- Real Calendar Sync & Custom Schedule Editor Bar -->
+        <div class="day-utility-bar">
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="pill-btn" onclick="syncDayToGoogleCalendar()">📅 Sync Day to Google Calendar</button>
+            <button class="pill-btn" onclick="downloadICSForDay()">⬇️ .ICS Calendar File</button>
+          </div>
+          <button class="pill-btn" onclick="openEditDayModal()">✏️ Edit This Day's Schedule</button>
+        </div>
+
+        <p class="swipe-hint">← Swipe left or right anywhere to switch tabs →</p>
       </section>
 
-      <!-- TAB 1: FULL PHASE-2 SCHEDULE & DATE NAVIGATION -->
+      <!-- TAB 2: FULL PHASE-2 SCHEDULE & CUSTOM BUILDER -->
       <section class="swipe-slide">
         <div class="filter-row">
-          <button class="pill-btn" onclick="setQuickDate('today')">Today</button>
-          <button class="pill-btn" onclick="setQuickDate('2026-10-22')">Oct 22 (Day 1)</button>
-          <button class="pill-btn" onclick="openEditDayModal()">✏️ Edit Active Day</button>
-          <button class="pill-btn" onclick="syncDayToGoogleCalendar()">📅 GCal</button>
-        </div>
-        <div class="filter-row">
-          <input type="text" class="search-input" id="scheduleSearch" placeholder="Search subject, FAT, or date..." oninput="renderTimeline()" />
-          <input type="date" class="search-input" style="max-width:150px;" id="jumpDateInput" min="2026-10-15" max="2026-12-15" onchange="jumpToSelectedDate(this.value)" />
+          <input type="text" class="search-input" id="scheduleSearch" placeholder="Search subject, topic, or date (e.g. Physics, 2026-11-01)..." oninput="renderTimeline()" />
+          <input type="date" class="search-input" style="max-width:165px;" id="jumpDateInput" min="2026-10-15" max="2026-12-15" onchange="jumpToSelectedDate(this.value)" />
+          <button class="pill-btn" onclick="openAddCustomDayModal()">+ Custom Day</button>
         </div>
         <div class="timeline-list" id="timelineList"></div>
       </section>
 
-      <!-- TAB 2: GOOGLE DRIVE PDF FOLDER & OFFICIAL EXAM BLUEPRINTS -->
+      <!-- TAB 3: GOOGLE DRIVE PDF FOLDER & OFFICIAL EXAM BLUEPRINTS -->
       <section class="swipe-slide">
         <div class="minimal-card">
           <h3>📁 Phase-2 Master Google Drive Folder</h3>
-          <p>Link your Google Drive folder containing all Phase-2 PDFs and Funwork sheets for 1-tap access.</p>
+          <p>Paste your Google Drive folder link containing all your Phase-2 PDFs so it is accessible in 1 tap from any test card.</p>
           <div class="input-row">
             <input type="url" class="search-input" id="masterDriveInput" placeholder="https://drive.google.com/drive/folders/..." />
-            <button class="pill-btn active" onclick="saveMasterDrive()">Save</button>
-            <button class="pill-btn" onclick="openMasterDrive()">Open ↗</button>
+            <button class="pill-btn active" onclick="saveMasterDrive()">Save Link</button>
+            <button class="pill-btn" id="openMasterDriveBtn" onclick="openMasterDrive()">Open Drive ↗</button>
+          </div>
+        </div>
+
+        <div class="minimal-card">
+          <h3>⏰ Real-Life Test Alert Timings</h3>
+          <p>Customize the exact clock times used for the live countdown timer and Google Calendar sync.</p>
+          <div class="input-row">
+            <label style="font-size:0.82rem; display:flex; align-items:center; gap:6px;">
+              Morning: <input type="time" class="search-input" style="min-width:120px; padding:6px 10px;" id="morningTimeInput" value="09:00" onchange="saveTestTimes()" />
+            </label>
+            <label style="font-size:0.82rem; display:flex; align-items:center; gap:6px;">
+              Evening: <input type="time" class="search-input" style="min-width:120px; padding:6px 10px;" id="eveningTimeInput" value="14:30" onchange="saveTestTimes()" />
+            </label>
           </div>
         </div>
 
@@ -715,120 +794,113 @@
         </div>
       </section>
 
-      <!-- TAB 3: EXAM SIMULATOR TIMER & DEC 1-3 ERROR VAULT -->
+      <!-- TAB 4: EXAM SIMULATOR TIMER & DEC 1-3 ERROR RECTIFICATION VAULT -->
       <section class="swipe-slide">
         <div class="minimal-card">
           <h3>⏱️ Exam Simulator Timer</h3>
-          <p>Simulate Session (50m), Cumulative (60m), or FAT (30m) exams under strict clock conditions.</p>
-          <div class="timer-display mono" id="simTimerDisplay">30:00</div>
+          <p>Practice writing your Session Exam, Cumulative Exam, or FAT under exact time limits.</p>
+          <div class="timer-display mono" id="simTimerDisplay">50:00</div>
           <div class="timer-controls">
-            <button class="pill-btn active" onclick="toggleSimTimer()">Start / Pause</button>
-            <button class="pill-btn" onclick="setSimDuration(30)">30m (FAT)</button>
+            <button class="pill-btn active" id="simStartBtn" onclick="toggleSimTimer()">Start / Pause</button>
             <button class="pill-btn" onclick="setSimDuration(50)">50m (Session)</button>
             <button class="pill-btn" onclick="setSimDuration(60)">60m (Cumulative)</button>
+            <button class="pill-btn" onclick="setSimDuration(30)">30m (FAT)</button>
           </div>
         </div>
 
         <div class="minimal-card">
-          <h3>🛡️ Error Rectification Vault (Dec 1–3 Review)</h3>
-          <p>Log missed concepts, tricky map points, or equations from daily tests to review during Dec 1–3.</p>
+          <h3>🛡️ Error Rectification Vault (For Dec 1–3 Review)</h3>
+          <p>Log any tricky questions, map points, or formulas you missed in daily tests so you can crush them during the Dec 1–3 Review days.</p>
           <div class="input-row">
-            <input type="text" class="search-input" id="vaultInput" placeholder="e.g., Chemistry: Soap micelle formation diagram..." />
-            <button class="pill-btn active" onclick="addVaultItem()">+ Log</button>
+            <input type="text" class="search-input" id="vaultInput" placeholder="e.g., Physics: Sign convention in concave lens numericals..." />
+            <button class="pill-btn active" onclick="addVaultItem()">+ Log Error</button>
           </div>
-          <div id="vaultListContainer" style="margin-top:10px;"></div>
+          <div id="vaultListContainer" style="margin-top:12px;"></div>
         </div>
       </section>
 
     </div>
   </main>
 
-  <!-- Subtle Bottom Tab Pill Indicator -->
-  <nav class="bottom-pill-nav" aria-label="Tab Navigation">
-    <button class="nav-dot active" onclick="goToTab(0)" title="Today's Focus"></button>
-    <button class="nav-dot" onclick="goToTab(1)" title="Full Schedule"></button>
-    <button class="nav-dot" onclick="goToTab(2)" title="Drive & Blueprints"></button>
-    <button class="nav-dot" onclick="goToTab(3)" title="Timer & Error Vault"></button>
-  </nav>
-
-  <!-- SLIDE-UP PORTION SHEET (MORNING, EVENING, OR FAT) -->
+  <!-- SLIDE-UP PORTION SHEET (OPENS WHEN MORNING OR EVENING BIG BUTTON IS PRESSED) -->
   <div class="modal-backdrop" id="portionModal" onclick="if(event.target===this) closePortionSheet()">
     <div class="modal-sheet">
       <div class="sheet-header">
         <div>
-          <span class="slot-badge" id="sheetSlotBadge">SLOT</span>
-          <h2 id="sheetSubjectTitle" style="font-size:1.25rem; margin-top:8px;">Subject</h2>
-          <p id="sheetDateSub" style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;"></p>
+          <span class="slot-badge" id="sheetSlotBadge">MORNING TEST</span>
+          <h2 id="sheetSubjectTitle" style="font-size:1.35rem; margin-top:8px;">Subject</h2>
+          <p id="sheetDateSub" style="font-size:0.82rem; color:var(--text-muted); margin-top:2px;"></p>
         </div>
         <button class="icon-btn" onclick="closePortionSheet()">✕</button>
       </div>
 
       <div id="sheetChecklistContainer" class="checklist-group"></div>
+
       <div class="pattern-box" id="sheetPatternBox"></div>
 
       <div class="section-divider"></div>
 
+      <!-- Session-Specific PDF / Drive Attachment & Score Logger -->
       <div style="display:flex; flex-direction:column; gap:10px;">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-          <strong style="font-size:0.82rem;">📎 Session PDF Link & Score</strong>
-          <button class="pill-btn" onclick="openCurrentSessionPdf()">Open PDF ↗</button>
+          <strong style="font-size:0.86rem;">📎 Study PDF / Drive Link & Score</strong>
+          <button class="pill-btn" id="openSessionPdfBtn" onclick="openCurrentSessionPdf()">Open Attached PDF ↗</button>
         </div>
         <div class="input-row" style="margin-top:0;">
-          <input type="url" class="search-input" id="sessionPdfInput" placeholder="Paste PDF link..." />
-          <input type="number" class="search-input" id="sessionScoreInput" style="max-width:105px;" placeholder="Marks" min="0" max="80" />
+          <input type="url" class="search-input" id="sessionPdfInput" placeholder="Paste PDF / Drive link for this session..." />
+          <input type="number" class="search-input" id="sessionScoreInput" style="max-width:110px;" placeholder="Score /25" min="0" max="30" />
           <button class="pill-btn active" onclick="saveSessionMeta()">Save</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- HIDDEN SETTINGS MODAL (⚙️) -->
-  <div class="modal-backdrop" id="settingsModal" onclick="if(event.target===this) closeSettingsModal()">
+  <!-- EDIT DAY SCHEDULE MODAL -->
+  <div class="modal-backdrop" id="editDayModal" onclick="if(event.target===this) closeEditDayModal()">
     <div class="modal-sheet">
       <div class="sheet-header">
         <div>
-          <h2>Settings & Preferences</h2>
-          <p style="font-size:0.8rem; color:var(--text-muted);">Theme, Student Profile, & Test Timings</p>
+          <h2>Customize Schedule</h2>
+          <p id="editModalDateLabel" style="font-size:0.84rem; color:var(--text-muted);"></p>
         </div>
-        <button class="icon-btn" onclick="closeSettingsModal()">✕</button>
+        <button class="icon-btn" onclick="closeEditDayModal()">✕</button>
       </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <label style="font-size:0.82rem; font-weight:600;">Morning Subject (Test 1)</label>
+        <input type="text" class="search-input" id="editT1Sub" placeholder="e.g., Mathematics (Session 1)" />
+        <label style="font-size:0.82rem; font-weight:600;">Morning Portion (Use | or ; to separate checkable topics)</label>
+        <input type="text" class="search-input" id="editT1Portion" placeholder="Enter portion details..." />
 
-      <div style="display:flex; flex-direction:column; gap:14px;">
-        <!-- Theme Switcher -->
-        <div style="display:flex; align-items:center; justify-content:space-between;">
-          <span style="font-size:0.86rem; font-weight:600;">Appearance Theme</span>
-          <button class="pill-btn" id="themeToggleBtn" onclick="toggleTheme()">☀️ Warm Cream</button>
+        <div class="section-divider"></div>
+
+        <label style="font-size:0.82rem; font-weight:600;">Evening Subject (Test 2)</label>
+        <input type="text" class="search-input" id="editT2Sub" placeholder="e.g., Social Science (Session 1) or leave empty" />
+        <label style="font-size:0.82rem; font-weight:600;">Evening Portion</label>
+        <input type="text" class="search-input" id="editT2Portion" placeholder="Enter portion details..." />
+
+        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px;">
+          <button class="pill-btn" onclick="resetScheduleToDefault()">Reset All to Default</button>
+          <button class="pill-btn active" onclick="saveDayScheduleEdits()">Save Changes</button>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="section-divider" style="margin:2px 0;"></div>
-
-        <!-- Student Profile -->
+  <!-- LOGIN / PROFILE SYNC MODAL -->
+  <div class="modal-backdrop" id="loginModal" onclick="if(event.target===this) closeLoginModal()">
+    <div class="modal-sheet">
+      <div class="sheet-header">
         <div>
-          <label style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:6px;">Student Profile</label>
-          <div class="input-row" style="margin-top:0;">
-            <input type="text" class="search-input" id="profileNameInput" placeholder="Name (Adhityan)" />
-            <input type="text" class="search-input" id="profileSectionInput" placeholder="Class / Set (Set D)" />
-          </div>
+          <h2>Student Profile & Sync</h2>
+          <p style="font-size:0.84rem; color:var(--text-muted);">Sign in to personalize your Phase-2 workspace and export/import your progress.</p>
         </div>
-
-        <!-- Test Timings -->
-        <div>
-          <label style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:6px;">Test Timings (Countdown & Calendar)</label>
-          <div class="input-row" style="margin-top:0;">
-            <label style="font-size:0.8rem; display:flex; align-items:center; gap:6px; flex:1;">
-              Morning: <input type="time" class="search-input" id="morningTimeInput" value="09:00" />
-            </label>
-            <label style="font-size:0.8rem; display:flex; align-items:center; gap:6px; flex:1;">
-              Evening: <input type="time" class="search-input" id="eveningTimeInput" value="14:30" />
-            </label>
-          </div>
-        </div>
-
-        <button class="pill-btn active" style="justify-content:center; padding:10px;" onclick="saveSettings()">Save Settings</button>
-
-        <div class="section-divider" style="margin:2px 0;"></div>
-
-        <!-- Backup & Restore -->
+        <button class="icon-btn" onclick="closeLoginModal()">✕</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <input type="text" class="search-input" id="profileNameInput" placeholder="Your Name (e.g., Adhityan)" />
+        <input type="text" class="search-input" id="profileSectionInput" placeholder="Class / Section (e.g., X - Challengers / Set D)" />
+        <button class="pill-btn active" style="justify-content:center; padding:11px;" onclick="saveUserProfile()">Save & Sign In</button>
+        <div class="section-divider"></div>
         <div style="display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap;">
           <button class="pill-btn" onclick="exportBackupJSON()">⬇️ Export Backup (.json)</button>
           <label class="pill-btn" style="cursor:pointer;">
@@ -840,117 +912,84 @@
     </div>
   </div>
 
-  <!-- EDIT DAY SCHEDULE MODAL -->
-  <div class="modal-backdrop" id="editDayModal" onclick="if(event.target===this) closeEditDayModal()">
-    <div class="modal-sheet">
-      <div class="sheet-header">
-        <div>
-          <h2>Edit Day Schedule</h2>
-          <p id="editModalDateLabel" style="font-size:0.8rem; color:var(--text-muted);"></p>
-        </div>
-        <button class="icon-btn" onclick="closeEditDayModal()">✕</button>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <label style="font-size:0.78rem; font-weight:600;">Morning Test Subject</label>
-        <input type="text" class="search-input" id="editT1Sub" />
-        <label style="font-size:0.78rem; font-weight:600;">Morning Portion (Use | to separate checklist items)</label>
-        <input type="text" class="search-input" id="editT1Portion" />
-
-        <label style="font-size:0.78rem; font-weight:600; margin-top:6px;">Evening Test Subject</label>
-        <input type="text" class="search-input" id="editT2Sub" />
-        <label style="font-size:0.78rem; font-weight:600;">Evening Portion</label>
-        <input type="text" class="search-input" id="editT2Portion" />
-
-        <label style="font-size:0.78rem; font-weight:600; margin-top:6px;">FAT Exam / Funwork Title</label>
-        <input type="text" class="search-input" id="editFatSub" />
-        <label style="font-size:0.78rem; font-weight:600;">FAT Exam / Funwork Portion</label>
-        <input type="text" class="search-input" id="editFatPortion" />
-
-        <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px;">
-          <button class="pill-btn" onclick="resetScheduleToDefault()">Reset All</button>
-          <button class="pill-btn active" onclick="saveDayScheduleEdits()">Save Day</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    // COMPLETE PHASE-2 SCHEDULE (OCT 15 TO DEC 15, 2026) WITH FAT EXAMS & FUNWORKS MAPPED FROM PDF
+    // EXACT PHASE 2 SCHEDULE DATA PROVIDED
     const DEFAULT_SCHEDULE = [
-      { "date": "2026-10-15", "day": "Thursday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Study Hour / Funwork Prep", "fat_portion": "Phase-II Preliminary Study Hours" },
-      { "date": "2026-10-16", "day": "Friday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Phase-2 Prep: Maths & Science", "fat_portion": "Review Real Numbers | Review Light - Reflection" },
-      { "date": "2026-10-17", "day": "Saturday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Phase-2 Prep: Social Science", "fat_portion": "Geo-1: Resources and Development | Geo-2: Forest and Wildlife" },
-      { "date": "2026-10-18", "day": "Sunday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Holiday", "fat_portion": "Dasara Festival Break" },
-      { "date": "2026-10-19", "day": "Monday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Holiday", "fat_portion": "Dasara Festival Break" },
-      { "date": "2026-10-20", "day": "Tuesday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Holiday", "fat_portion": "Dasara Festival Break" },
-      { "date": "2026-10-21", "day": "Wednesday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Day-1 Readiness Check", "fat_portion": " Maths: Real Numbers | Social: Geo-1 & Geo-2" },
-      { "date": "2026-10-22", "day": "Thursday", "test1_subject": "Mathematics (Session 1)", "test1_portion": "Real Numbers", "test2_subject": "Social Science (Session 1)", "test2_portion": "Geo-1: Resources and Development | Geo-2: Forest and Wild Life Resources | Map Work: Soil Types, Major Dams", "fat_subject": "Funwork: Maths FW-1 & Social Day-1", "fat_portion": "Maths FW-1: a) Real Numbers, b) Polynomials | Social FW Sheets 1, 2 & 3: Geo-1, Geo-2 & Map WS (Soil Types, Major Dams)" },
-      { "date": "2026-10-23", "day": "Friday", "test1_subject": "Physics (Session 1)", "test1_portion": "Light - Reflection", "test2_subject": "English (Session 1)", "test2_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. I & II | Writing: Complaint Letter, Excerpts, Product Based | Literature: Prose - A Letter to God, Poem - Dust of Snow & Fire and Ice", "fat_subject": "Funwork: Physics FW-I & English FW-1", "fat_portion": "Physics Fun Worksheet-I: Light - Reflection and Refraction | English Funwork 1: Reading & Grammar Q. I-II" },
-      { "date": "2026-10-24", "day": "Saturday", "test1_subject": "Chemistry (Session 1)", "test1_portion": "Chemical reactions and equations Part 1, 2, 3 (Challengers SET D: Part 2, 3)", "test2_subject": "Tamil (Session 1)", "test2_portion": "இயல் - 1: உரைநடை: பாவாணர் பார்வையில் தமிழ்ச்சொல் வளம் (2x5=10) | செய்யுள்: அன்னை மொழியே, காலக்கணிதம் (3x4=12) | செய்யுள்வரி வினாவிடை (3x1=3)", "fat_subject": "Funwork: Chemistry Day-1 & Tamil FW-1", "fat_portion": "Chemistry: Chemical reactions and equations - Worksheet 1 (FAT-1 Syllabus) | Tamil FW-1: பத்தி வினா" },
-      { "date": "2026-10-25", "day": "Sunday", "test1_subject": "Social Science (Session 2 - Sunday)", "test1_portion": "DP-3: Gender, Religion and Caste | Map Work: Software Techno Parks, Cotton Textiles", "test2_subject": null, "test2_portion": null, "fat_subject": "Funwork: Social Day-2", "fat_portion": "Social FW Sheets 4, 5 & 6: DP-3 Gender, Religion and Caste | Eco-1 Development | Map WS (Software Techno Parks, Cotton Textiles)" },
-      { "date": "2026-10-26", "day": "Monday", "test1_subject": "Mathematics (Session 2)", "test1_portion": "Polynomials", "test2_subject": "Biology (Session 1)", "test2_portion": "Chapter 5: Life Processes - 5.1 What are Life Processes?, 5.2 Nutrition & 5.3 Respiration", "fat_subject": "FAT #1: Social Science FAT-1", "fat_portion": "Social FAT-1 (20M | 30m): Based on Funwork Day 1 & 2 (Geo-1, Geo-2, DP-3, Eco-1 & Maps)" },
-      { "date": "2026-10-27", "day": "Tuesday", "test1_subject": "Social Science (Session 3)", "test1_portion": "Eco-1: Development | Eco-4: Globalisation & The Indian Economy | Map Work: Major Crops 'Rice, Wheat', Sugarcane, Tea, Coffee, Rubber, Cotton, Jute, Iron & Steel Plants", "test2_subject": "English (Session 2)", "test2_portion": "Reading: Discursive & Case Based Passages | Grammar: Q. No. III-IV | Writing: Analytical Paragraph - Tabular form, Profiles | Literature: Nelson Mandela, A Tiger in the Zoo, SR - A Triumph of Surgery", "fat_subject": "FAT #2: English FAT-1", "fat_portion": "English FAT-1 (20M | 30m): Based on Funworks 1 & 2 (Sessions 1 & 2 Syllabus)" },
-      { "date": "2026-10-28", "day": "Wednesday", "test1_subject": "Physics (Session 2)", "test1_portion": "Light - Refraction", "test2_subject": "Tamil (Session 2)", "test2_portion": "இயல் - 2: உரைநடை: கேட்கிறதா என்குரல்! (2x5=10) | செய்யுள்: பரிபாடல், மேகம் (3x4=12) | செய்யுள்வரி வினாவிடை (3x1=3)", "fat_subject": "FAT #3: Tamil FAT-1", "fat_portion": "Tamil FAT-1 (20M | 30m): Fun Works 1 & 2 — பத்தி வினா (சுருக்கமான விடை) (2x5=10, 2x5=10)" },
-      { "date": "2026-10-29", "day": "Thursday", "test1_subject": "Mathematics (Session 3)", "test1_portion": "Introduction to Trigonometry", "test2_subject": "Chemistry (Session 2)", "test2_portion": "Carbon and its compounds - Part 1 & Part 2 (Hydrocarbons, Homologous series & IUPAC) (SET D: Part 2)", "fat_subject": "FAT #4: Mathematics FAT-1", "fat_portion": "Maths FAT-1 (20M | 30m): Funwork 1 & 2 — a) Real Numbers, b) Polynomials, Introduction to Trigonometry" },
-      { "date": "2026-10-30", "day": "Friday", "test1_subject": "Social Science (Session 4)", "test1_portion": "His-5: Print Culture (3. The Print Revolution and Its Impact, 4. The Reading Mania) | Map Work: INC Sessions, National Movement Centres, Thermal & Nuclear Plants", "test2_subject": "Biology (Session 2)", "test2_portion": "Chapter 5: Life Processes - 5.4 Transportation & 5.5 Excretion", "fat_subject": "FAT #5: Biology FAT-1", "fat_portion": "Biology FAT-1 (20M | 30m): Worksheet 1 — Chapter 5: Life Processes (Complete)" },
-      { "date": "2026-10-31", "day": "Saturday", "test1_subject": "English (Session 3)", "test1_portion": "Reading Passages | Grammar: Q. No. V-VI | Writing: Letter to the Editor, Excerpts | Literature: Two Stories about Flying (Part I & II), SR - The Thief's Story", "test2_subject": "Tamil (Session 3)", "test2_portion": "இயல் - 3: உரைநடை: விருந்து போற்றுதும்! (2x5=10) | செய்யுள்: காசிக்காண்டம், முத்துக்குமாரசாமி பிள்ளைத்தமிழ், திருக்குறள் (3x4=12) | செய்யுள்வரி வினாவிடை (3x1=3)", "fat_subject": "FAT #6: Chemistry FAT-1", "fat_portion": "Chemistry FAT-1 (20M | 30m): Chemical reactions and equations (WS-1) & Metals and Non-metals (WS-1)" },
-      { "date": "2026-11-01", "day": "Sunday", "test1_subject": "Physics (Session 6 - Sunday Buffer)", "test1_portion": "Magnetic Effects of Electric Current", "test2_subject": null, "test2_portion": null, "fat_subject": "Funwork: Social Day-3 & Tamil FW-3", "fat_portion": "Social FW Sheets 7, 8 & 9: Geo-6, His-5 (1-5) & Maps | Tamil FW-3: காட்சியைக் கண்டு கவினுற எழுதுக" },
-      { "date": "2026-11-02", "day": "Monday", "test1_subject": "Mathematics (Session 4)", "test1_portion": "Pair of Linear Equations in two variables", "test2_subject": "Social Science (Session 5)", "test2_portion": "His-5: Print Culture (1, 2, 5, 6, 7, 8, 9) | Map Work: Major Ports, International Airports", "fat_subject": "FAT #7: Social Science FAT-2", "fat_portion": "Social FAT-2 (20M | 30m): Funwork Day 3 & 4 — Geo-6, His-5 (Complete), His-1 & Maps" },
-      { "date": "2026-11-03", "day": "Tuesday", "test1_subject": "Physics (Session 3)", "test1_portion": "Light - Reflection & Refraction", "test2_subject": "English (Session 4)", "test2_portion": "Reading Passages | Grammar: Q. No. VII-VIII | Writing: Analytical Paragraph - SWOT, Profiles | Literature: Diary of Anne Frank, How to Tell Wild Animals, SR - The Midnight Visitor", "fat_subject": "FAT #8: English FAT-2", "fat_portion": "English FAT-2 (20M | 30m): Based on Funworks 3 & 4 (Sessions 3 & 4 Syllabus)" },
-      { "date": "2026-11-04", "day": "Wednesday", "test1_subject": "Chemistry (Session 3)", "test1_portion": "Carbon and its compounds - Part 3 (Chemical properties, Ethyl alcohol, Ethanoic acid, Soaps and Detergents)", "test2_subject": "Tamil (Session 4)", "test2_portion": "துணைப்பாடம்: புயலிலே ஒரு தோணி, கோபல்லபுரத்து மக்கள், பிரும்மம் (1x10=10) | இலக்கணம்: சொல், தொகைநிலை, தொகாநிலைத் தொடர்கள் (15x1=15)", "fat_subject": "FAT #9: Tamil FAT-2", "fat_portion": "Tamil FAT-2 (20M | 30m): Fun Works 3 & 4 — காட்சியைக் கண்டு கவினுற எழுதுக (2x3=9) | திருக்குறள் இயல்-3 நிரப்புக (11x1=11)" },
-      { "date": "2026-11-05", "day": "Thursday", "test1_subject": "Mathematics (Session 5)", "test1_portion": "Coordinate Geometry", "test2_subject": "Biology (Session 3)", "test2_portion": "Chapter 6: Control and Coordination", "fat_subject": "FAT #10: Mathematics FAT-2", "fat_portion": "Maths FAT-2 (20M | 30m): Funwork 3 & 4 — Pair of Linear Equations in Two Variables & Coordinate Geometry" },
-      { "date": "2026-11-06", "day": "Friday", "test1_subject": "Social Science (Session 6)", "test1_portion": "His-1: The Rise of Nationalism in Europe | Geo-3: Water Resources | Map Work: Iron Ore Mines, Coal Mines & Oil Fields", "test2_subject": "Information Technology (Session 1)", "test2_portion": "IT Session 1 Revision (Part A & Part B Units)", "fat_subject": "FAT #11: Information Technology FAT-1", "fat_portion": "IT FAT-1 (20M | 30m): Based on IT Funworks 1 & 2" },
-      { "date": "2026-11-07", "day": "Saturday", "test1_subject": "Diwali Vacation", "test1_portion": "Diwali Vacation (07.11.2026 to 09.11.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Holiday", "fat_portion": "Diwali Festival Break" },
-      { "date": "2026-11-08", "day": "Sunday", "test1_subject": "Diwali Vacation", "test1_portion": "Diwali Vacation (07.11.2026 to 09.11.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Holiday", "fat_portion": "Diwali Festival Break" },
-      { "date": "2026-11-09", "day": "Monday", "test1_subject": "Diwali Vacation", "test1_portion": "Diwali Vacation (07.11.2026 to 09.11.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Holiday", "fat_portion": "Diwali Festival Break" },
-      { "date": "2026-11-10", "day": "Tuesday", "test1_subject": "Mathematics (Session 6)", "test1_portion": "Surface Areas and Volumes", "test2_subject": "English (Session 5)", "test2_portion": "Reading Passages | Grammar: Q. No. IX-X | Writing: Letter of Placing an Order, Excerpts | Literature: Glimpses of India (I. A Baker from Goa, II. Coorg, III. Tea from Assam)", "fat_subject": "Funwork: Maths FW-5 & Social Day-5", "fat_portion": "Maths FW-5: Surface Areas and Volumes | Social FW Sheets 13, 14 & 15: Geo-3 Water Resources, Eco-3 Money & Credit, Map WS" },
-      { "date": "2026-11-11", "day": "Wednesday", "test1_subject": "Social Science (Session 7)", "test1_portion": "Eco-3: Money and Credit | Map Work: Cumulative", "test2_subject": "Tamil (Session 5)", "test2_portion": "இயல் - 4: உரைநடை: மொழிபெயர்ப்புக் கல்வி (1x5=5) | செய்யுள்: திருவிளையாடற் புராணம் (1x4=4) | துணைப்பாடம்: புதிய நம்பிக்கை (1x10=10) | இலக்கணம்: பொது (6x1=6)", "fat_subject": "Funwork: Tamil FW-5 & Physics FW-II", "fat_portion": "Tamil FW-5: பத்தி வினா (சுருக்கமான விடை) | Physics Fun Worksheet-II: Human Eye and Colourful World" },
-      { "date": "2026-11-12", "day": "Thursday", "test1_subject": "Physics (Session 4)", "test1_portion": "Human Eye and the Colourful World", "test2_subject": "Chemistry (Session 4)", "test2_portion": "Acids, bases and salts & Metals and non-metals (SET D: Acids, bases and salts Part 1, 3)", "fat_subject": "FAT #12: Physics FAT-1 & Chemistry FAT-2", "fat_portion": "Physics FAT-1: Fun Worksheet I & II (Light & Human Eye) | Chemistry FAT-2: Acids, Bases & Salts (WS-1) + Carbon & its Compounds (WS-1)" },
-      { "date": "2026-11-13", "day": "Friday", "test1_subject": "Mathematics (Session 7)", "test1_portion": "Circles", "test2_subject": "Biology (Session 4)", "test2_portion": "Chapter 7: How do organisms reproduce?", "fat_subject": "FAT #13: Mathematics FAT-3", "fat_portion": "Maths FAT-3 (20M | 30m): Funwork 5 & 6 — Surface Areas and Volumes & Circles" },
-      { "date": "2026-11-14", "day": "Saturday", "test1_subject": "Social Science (Session 8)", "test1_portion": "His-2: Nationalism in India | Map Work: INC Sessions, National Movement Centres, Thermal & Nuclear Power Plants", "test2_subject": "English (Session 6)", "test2_portion": "Reading Passages | Grammar: Q. No. XI-XII | Writing: Analytical Paragraph - Pie chart, Profiles | Literature: The Ball Poem & Amanda!, SR - A Question of Trust & Footprints without Feet", "fat_subject": "FAT #14: Social FAT-3 & English FAT-3", "fat_portion": "Social FAT-3: Funwork Day 5 & 6 (Geo-3, Eco-3, His-2, DP-1 & Maps) | English FAT-3: Funworks 5 & 6" },
-      { "date": "2026-11-15", "day": "Sunday", "test1_subject": "Mathematics (Session 8 - Cumulative)", "test1_portion": "Cumulative Session (Based on Session VI & VII: Surface Areas and Volumes, Circles) [Duration: 1 Hour | Max Marks: 30]", "test2_subject": null, "test2_portion": null, "fat_subject": "Funwork: Tamil FW-6", "fat_portion": "Tamil FW-6: பத்தி வினா (Phase 1 - Page No. 137)" },
-      { "date": "2026-11-16", "day": "Monday", "test1_subject": "Tamil (Session 6)", "test1_portion": "இயல் - 5: உரைநடை: பன்முகக் கலைஞர் (1x5=5) | செய்யுள்: கம்பராமாயணம், திருக்குறள் (1x4=4) | துணைப்பாடம்: பாய்ச்சல் (1x10=10) | இலக்கணம்: அகப்பொருள் (6x1=6)", "test2_subject": "Information Technology (Session 2)", "test2_portion": "IT Session 2 Revision (Part A & Part B Units)", "fat_subject": "FAT #15: Tamil FAT-3", "fat_portion": "Tamil FAT-3 (20M | 30m): Fun Works 5 & 6 — பத்தி வினா (சுருக்கமான விடை) (2x5=10) & பத்தி வினா (2x5=10)" },
-      { "date": "2026-11-17", "day": "Tuesday", "test1_subject": "Mathematics (Session 9)", "test1_portion": "Areas Related to Circles + Arithmetic Progressions", "test2_subject": "Social Science (Session 9)", "test2_portion": "DP-1: Power Sharing | DP-2: Federalism | Map Work: Soil Types, Major Dams", "fat_subject": "Funwork: Maths FW-7 & Social Day-7", "fat_portion": "Maths FW-7: a) Areas Related to Circles, b) Arithmetic Progressions | Social FW Sheets 19-22: Geo-4, DP-2, Eco-4 & Maps" },
-      { "date": "2026-11-18", "day": "Wednesday", "test1_subject": "Physics (Session 5)", "test1_portion": "Electricity", "test2_subject": "English (Session 7)", "test2_portion": "Reading Passages | Grammar: Q. No. I-XII | Writing: Letter of Inquiry, Excerpts | Literature: Mijbil the Otter, Poem - The Trees, SR - The Making of a Scientist", "fat_subject": "FAT #16: Physics FAT-2", "fat_portion": "Physics FAT-2 (20M | 30m): Fun Worksheet-III (Electricity) & Additional Worksheet (Magnetic Effects of Electric Current)" },
-      { "date": "2026-11-19", "day": "Thursday", "test1_subject": "Biology (Session 5)", "test1_portion": "Chapter 8: Heredity & Chapter 13: Our Environment", "test2_subject": "Tamil (Session 7)", "test2_portion": "இயல் - 6: உரைநடை: சிற்றகல் ஒளி (1x5=5) | செய்யுள்: சிலப்பதிகாரம், முத்தொள்ளாயிரம் (1x4=4) | துணைப்பாடம்: மங்கையராய்ப் பிறப்பதற்கே (1x10=10) | இலக்கணம்: புறப்பொருள் (6x1=6)", "fat_subject": "FAT #17: Biology FAT-2", "fat_portion": "Biology FAT-2 (20M | 30m): Worksheets 2 & 3 — Ch 6: Control & Coordination, Ch 7: Reproduction, Ch 8: Heredity, Ch 13: Our Environment" },
-      { "date": "2026-11-20", "day": "Friday", "test1_subject": "Mathematics (Session 10)", "test1_portion": "Quadratic Equations", "test2_subject": "Social Science (Session 10)", "test2_portion": "Geo-4: Agriculture | Geo-6: Manufacturing Industries | Map Work: Major Crops, Sugarcane, Tea, Coffee, Rubber, Cotton, Jute, Iron & Steel Plants", "fat_subject": "Funwork: Maths FW-8 & Social Day-8", "fat_portion": "Maths FW-8: a) Quadratic Equations, b) Triangles | Social FW Sheets 23-25: DP-5 Outcomes of Democracy, Geo-5 Minerals & Maps" },
-      { "date": "2026-11-21", "day": "Saturday", "test1_subject": "English (Session 8)", "test1_portion": "Reading Passages | Grammar: Q. No. I-XII | Writing: Analytical Paragraph - Bar Graph, Profiles | Literature: Madam Rides the Bus, Poem - Fog, SR - The Necklace", "test2_subject": "Tamil (Session 8)", "test2_portion": "இயல் - 7: உரைநடை: சங்க இலக்கியத்தில் அறம் (1x5=5) | செய்யுள்: தேம்பாவணி, அக்கறை (1x4=4) | துணைப்பாடம்: இராமானுசர் - நாடகம் (1x10=10) | இலக்கணம்: பா வகை, அலகிடுதல் (6x1=6)", "fat_subject": "FAT #18: Social Science FAT-4", "fat_portion": "Social FAT-4 (20M | 30m): Based on Funwork Day 7 & 8 (Geo-4, DP-2, Eco-4, DP-5, Geo-5 & Maps)" },
-      { "date": "2026-11-22", "day": "Sunday", "test1_subject": "Chemistry (Session 5 - Sunday Buffer)", "test1_portion": "Periodic classification of elements (Challengers SET D: Metals and non-metals Part 2, 3)", "test2_subject": null, "test2_portion": null, "fat_subject": "Funwork: Tamil FW-7", "fat_portion": "Tamil FW-7: இலக்கணம் (இயல் 4, 5, 6, 7)" },
-      { "date": "2026-11-23", "day": "Monday", "test1_subject": "Mathematics (Session 11)", "test1_portion": "Triangles", "test2_subject": "Social Science (Session 11)", "test2_portion": "DP-5: Outcomes of Democracy | Map Work: Software Techno Parks, Cotton Textiles", "fat_subject": "FAT #19: Mathematics FAT-4", "fat_portion": "Maths FAT-4 (20M | 30m): Funwork 7 & 8 — Areas Related to Circles, AP, Quadratic Equations, Triangles" },
-      { "date": "2026-11-24", "day": "Tuesday", "test1_subject": "English (Session 9)", "test1_portion": "Reading Passages | Grammar: Q. No. I-XII | Writing: Analytical Paragraph - Report writing, Excerpts | Literature: The Sermon at Benares, The Tale of Custard the Dragon, SR - Bholi", "test2_subject": "Tamil (Session 9)", "test2_portion": "காட்சியைக் கண்டு கவினுற எழுதுக (2x3=6) | நிரப்புக - இயல் 3 (6x1=6) | பத்தி வினா (5x1=5) | கடிதம்/விண்ணப்பம் (1x8=8)", "fat_subject": "Funwork: Tamil FW-8 & Maths FW-9", "fat_portion": "Tamil FW-8: கடிதம் / விண்ணப்பம் | Maths FW-9: a) Some Applications of Trigonometry, b) Statistics" },
-      { "date": "2026-11-25", "day": "Wednesday", "test1_subject": "Mathematics (Session 12)", "test1_portion": "Some Applications of Trigonometry", "test2_subject": "Social Science (Session 12)", "test2_portion": "Geo-5: Minerals And Energy Resources | Map Work: Iron Ore Mines, Coal Mines & Oil Fields", "fat_subject": "Funwork: Social Day-9", "fat_portion": "Social FW Sheets 26-29: Eco-2 Sectors, DP-4 Political Parties, His-3 Global World (1.1-1.3) & Maps" },
-      { "date": "2026-11-26", "day": "Thursday", "test1_subject": "English (Session 10)", "test1_portion": "Reading Passages | Grammar: Q. No. I-XII | Writing: Analytical Paragraph - Line Graph, Map & Profiles | Literature: The Proposal (Play), For Anne Gregory, SR - The Book that Saved the Earth", "test2_subject": "Information Technology (Session 3)", "test2_portion": "IT Session 3 Revision (Part A & Part B Units)", "fat_subject": "FAT #20: English FAT-4", "fat_portion": "English FAT-4 (20M | 30m): Based on Funworks 7 & 8 (Sessions 7–10 Syllabus)" },
-      { "date": "2026-11-27", "day": "Friday", "test1_subject": "Mathematics (Session 13)", "test1_portion": "Statistics + Probability", "test2_subject": "Social Science (Session 13)", "test2_portion": "Eco-2: Sectors of the Indian Economy | Map Work: Major Ports, International Airports", "fat_subject": "FAT #21: Mathematics FAT-5", "fat_portion": "Maths FAT-5 (20M | 30m): Funwork 9 & 10 — Some Applications of Trigonometry, Statistics & Probability" },
-      { "date": "2026-11-28", "day": "Saturday", "test1_subject": "Tamil (Session 10)", "test1_portion": "பொதுக்கட்டுரை (1x6=6) | கடிதம்/விண்ணப்பம் (1x8=8) | நிரப்புக - இயல் 5 (11x1=11)", "test2_subject": "Social Science (Session 14)", "test2_portion": "DP-4: Political Parties | His-3: The Making of a Global World (1.1-1.3) | Map Work: Cumulative", "fat_subject": "FAT #22 & #23: Tamil FAT-4 & Social FAT-5", "fat_portion": "Tamil FAT-4: FW 7 & 8 — இலக்கணம் இயல் 4,5,6,7 (12M) & கடிதம்/விண்ணப்பம் (8M) | Social FAT-5: Day 9 & 10 Cumulative" },
-      { "date": "2026-11-29", "day": "Sunday", "test1_subject": "Sunday Self-Study Buffer", "test1_portion": "Full Syllabus Consolidation & Pending Funwork Completion", "test2_subject": null, "test2_portion": null, "fat_subject": "Buffer Revision", "fat_portion": "Review all 25 FAT Question Papers" },
-      { "date": "2026-11-30", "day": "Monday", "test1_subject": "Life Skills Motivation", "test1_portion": "1 Day for Life Skills Motivation Session", "test2_subject": null, "test2_portion": null, "fat_subject": "Mindset & Board Exam Strategy", "fat_portion": "Organize Error Vault for Dec 1–3 Rectification" },
-      { "date": "2026-12-01", "day": "Tuesday", "test1_subject": "Review & Error Rectification (Day 1)", "test1_portion": "Mathematics & Science Error Rectification", "test2_subject": "Review & Error Rectification (Evening)", "test2_portion": "Clear logged items in Tab 3 Error Vault", "fat_subject": "Error Rectification Focus", "fat_portion": "Re-solve incorrect questions from Session Exams 1–30" },
-      { "date": "2026-12-02", "day": "Wednesday", "test1_subject": "Review & Error Rectification (Day 2)", "test1_portion": "Social Science & Languages Error Rectification", "test2_subject": "Review & Error Rectification (Evening)", "test2_portion": "Complete Map Work & Grammar Rectification", "fat_subject": "Error Rectification Focus", "fat_portion": "Re-solve incorrect questions from Session Exams 31–66" },
-      { "date": "2026-12-03", "day": "Thursday", "test1_subject": "Review & Error Rectification (Day 3)", "test1_portion": "Final 100% Syllabus Rapid Revision", "test2_subject": "Review & Error Rectification (Evening)", "test2_portion": "Pre-Final 2 Readiness Check", "fat_subject": "Final FAT & Formula Review", "fat_portion": "All 25 FAT Papers Rapid Recap" },
-      { "date": "2026-12-04", "day": "Friday", "test1_subject": "Pre-Final 2 Prep: Social Science", "test1_portion": "Full Day Preparation for Pre-Final 2 First Exam (Social Science)", "test2_subject": null, "test2_portion": null, "fat_subject": "Map & Timeline Marathon", "fat_portion": "Revise all 29 Social Funwork & Map Worksheets" },
-      { "date": "2026-12-05", "day": "Saturday", "test1_subject": "Pre-Final 2 Exam: Social Science", "test1_portion": "Full Syllabus (100%) | Exam Time: 10:15 A.M to 01:30 P.M", "test2_subject": "Prep for English", "test2_portion": "Literature & Writing Formats Revision", "fat_subject": "Board Exam Simulation", "fat_portion": "Social Science 80M Board Paper" },
-      { "date": "2026-12-06", "day": "Sunday", "test1_subject": "Pre-Final 2 Prep: English", "test1_portion": "Full Day Preparation for Pre-Final 2 English Exam", "test2_subject": null, "test2_portion": null, "fat_subject": "Grammar & Writing Marathon", "fat_portion": "Letters, Analytical Paragraphs, All Poems & Prose" },
-      { "date": "2026-12-07", "day": "Monday", "test1_subject": "Pre-Final 2 Exam: English", "test1_portion": "Full Syllabus (100%) | Exam Time: 10:15 A.M to 01:30 P.M", "test2_subject": "Prep for Science", "test2_portion": "Physics Numericals & Ray Diagrams", "fat_subject": "Board Exam Simulation", "fat_portion": "English 80M Board Paper" },
-      { "date": "2026-12-08", "day": "Tuesday", "test1_subject": "Pre-Final 2 Prep: Science", "test1_portion": "Full Day Preparation for Pre-Final 2 Science (Physics, Chemistry, Biology)", "test2_subject": null, "test2_portion": null, "fat_subject": "Equations & Diagrams Review", "fat_portion": "All Chemical Equations, Bio Diagrams & Physics Formulas" },
-      { "date": "2026-12-09", "day": "Wednesday", "test1_subject": "Pre-Final 2 Exam: Science", "test1_portion": "Full Syllabus (100%) | Exam Time: 10:15 A.M to 01:30 P.M", "test2_subject": "Prep for Second Language (Tamil)", "test2_portion": "இயல் 1–7 உரைநடை & செய்யுள்", "fat_subject": "Board Exam Simulation", "fat_portion": "Science 80M Board Paper" },
-      { "date": "2026-12-10", "day": "Thursday", "test1_subject": "Pre-Final 2 Prep: Tamil", "test1_portion": "Full Day Preparation for Pre-Final 2 Second Language (Tamil) Exam", "test2_subject": null, "test2_portion": null, "fat_subject": "இலக்கணம் & கட்டுரை Review", "fat_portion": "All 8 Tamil Funwork Topics & Letters" },
-      { "date": "2026-12-11", "day": "Friday", "test1_subject": "Pre-Final 2 Exam: Tamil (SL)", "test1_portion": "Full Syllabus (100%) | Exam Time: 10:15 A.M to 01:30 P.M", "test2_subject": "Prep for Information Technology", "test2_portion": "Part A Employability Skills & Part B Subject Skills", "fat_subject": "Board Exam Simulation", "fat_portion": "Tamil 80M Board Paper" },
-      { "date": "2026-12-12", "day": "Saturday", "test1_subject": "Pre-Final 2 Exam: Information Technology", "test1_portion": "Full Syllabus (100%) | Exam Time: 10:15 A.M to 12:30 P.M", "test2_subject": "Prep for Mathematics", "test2_portion": "Trigonometry, Triangles & Surface Areas", "fat_subject": "Board Exam Simulation", "fat_portion": "IT 50M Board Paper" },
-      { "date": "2026-12-13", "day": "Sunday", "test1_subject": "Pre-Final 2 Prep: Mathematics", "test1_portion": "Full Day Preparation for Pre-Final 2 Mathematics Exam", "test2_subject": null, "test2_portion": null, "fat_subject": "Formula & Theorem Marathon", "fat_portion": "All 13 Maths Sessions & 10 Funwork Sheets" },
-      { "date": "2026-12-14", "day": "Monday", "test1_subject": "Pre-Final 2 Exam: Mathematics", "test1_portion": "Full Syllabus (100%) | Exam Time: 12:45 P.M to 04:00 P.M", "test2_subject": "Answer Script Distribution", "test2_portion": "Distribution of Answer Scripts with Analysis & Remedial", "fat_subject": "Board Exam Simulation", "fat_portion": "Mathematics 80M Board Paper" },
-      { "date": "2026-12-15", "day": "Tuesday", "test1_subject": "Answer Script Analysis & Remedial", "test1_portion": "Complete Analysis and Remedial Session", "test2_subject": null, "test2_portion": null, "fat_subject": "Phase-2 Complete", "fat_portion": "Review Pre-Final 2 Performance" }
+      { "date": "2026-10-15", "day": "Thursday", "test1_subject": "Holiday", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-10-16", "day": "Friday", "test1_subject": "Holiday", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-10-17", "day": "Saturday", "test1_subject": "Holiday", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-10-18", "day": "Sunday", "test1_subject": "Holiday", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-10-19", "day": "Monday", "test1_subject": "Holiday", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-10-20", "day": "Tuesday", "test1_subject": "Holiday", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-10-21", "day": "Wednesday", "test1_subject": "Holiday", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-10-22", "day": "Thursday", "test1_subject": "Mathematics (Session 1)", "test1_portion": "Real Numbers", "test2_subject": "Social Science (Session 1)", "test2_portion": "Geo-1: Resources and Development; Geo-2: Forest and Wild Life Resources | Map Work: Soil Types, Major Dams" },
+      { "date": "2026-10-23", "day": "Friday", "test1_subject": "Physics (Session 1)", "test1_portion": "Light - Reflection", "test2_subject": "English (Session 1)", "test2_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. I & II | Writing: Complaint Letter, Excerpts, Product Based | Literature: Prose - A Letter to God, Poem - Dust of Snow & Fire and Ice" },
+      { "date": "2026-10-24", "day": "Saturday", "test1_subject": "Chemistry (Session 1)", "test1_portion": "Chemical reactions and equations Part 1, 2, 3 (Note: For Challengers SET D only Part 2, 3)", "test2_subject": "Tamil (Session 1)", "test2_portion": "இயல் - 1: உரைநடை: பாவாணர் பார்வையில் தமிழ்ச்சொல் வளம் (2x5=10) | செய்யுள்: அன்னை மொழியே, காலக்கணிதம் (3x4=12) | செய்யுள்வரி வினாவிடை (3x1=3) [Total: 25 Marks]" },
+      { "date": "2026-10-25", "day": "Sunday", "test1_subject": "Social Science (Session 2 - Sunday Session)", "test1_portion": "DP-3: Gender, Religion and Caste | Map Work: Software Techno Parks, Cotton Textiles", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-10-26", "day": "Monday", "test1_subject": "Mathematics (Session 2)", "test1_portion": "Polynomials", "test2_subject": "Biology (Session 1)", "test2_portion": "Chapter 5: Life Processes - 5.1 What are Life Processes?, 5.2 Nutrition & 5.3 Respiration" },
+      { "date": "2026-10-27", "day": "Tuesday", "test1_subject": "Social Science (Session 3)", "test1_portion": "Eco-1: Development; Eco-4: Globalisation & The Indian Economy | Map Work: Major Crops 'Rice, Wheat', Major producer states of Sugarcane, Tea, Coffee, Rubber, Cotton and Jute, Iron and Steel Plants", "test2_subject": "English (Session 2)", "test2_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. III-IV | Writing: Analytical Paragraph - Tabular form, Profiles, Event/Area Based | Literature: Prose - Nelson Mandela, Poem - A Tiger in the Zoo, SR - A Triumph of Surgery" },
+      { "date": "2026-10-28", "day": "Wednesday", "test1_subject": "Physics (Session 2)", "test1_portion": "Light - Refraction", "test2_subject": "Tamil (Session 2)", "test2_portion": "இயல் - 2: உரைநடை: கேட்கிறதா என்குரல்! (2x5=10) | செய்யுள்: பரிபாடல், மேகம் (3x4=12) | செய்யுள்வரி வினாவிடை (3x1=3) [Total: 25 Marks]" },
+      { "date": "2026-10-29", "day": "Thursday", "test1_subject": "Mathematics (Session 3)", "test1_portion": "Introduction to Trigonometry", "test2_subject": "Chemistry (Session 2)", "test2_portion": "Carbon and its compounds - Part 1 (Introduction, Bonding in carbon, Isotopes, Allotropes and Unique Properties of carbon) & Part 2 (Hydrocarbons, Homologous series & IUPAC nomenclature) (Note: For Challengers SET D only Part 2)" },
+      { "date": "2026-10-30", "day": "Friday", "test1_subject": "Social Science (Session 4)", "test1_portion": "His-5: Print Culture and The Modern World (3. The Print Revolution and Its Impact, 4. The Reading Mania) | Map Work: INC Sessions, Important Centres of the National Movement, Thermal & Nuclear Power Plants", "test2_subject": "Biology (Session 2)", "test2_portion": "Chapter 5: Life Processes - 5.4 Transportation & 5.5 Excretion" },
+      { "date": "2026-10-31", "day": "Saturday", "test1_subject": "English (Session 3)", "test1_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. V-VI | Writing: Letter to the Editor, Excerpts | Literature: Prose - Two Stories about Flying (Part I & II), SR - The Thief's Story", "test2_subject": "Tamil (Session 3)", "test2_portion": "இயல் - 3: உரைநடை: விருந்து போற்றுதும்! (2x5=10) | செய்யுள்: காசிக்காண்டம், முத்துக்குமாரசாமி பிள்ளைத்தமிழ், திருக்குறள் (3x4=12) | செய்யுள்வரி வினாவிடை (3x1=3) [Total: 25 Marks]" },
+      { "date": "2026-11-01", "day": "Sunday", "test1_subject": "Physics (Session 6 - 2nd Sunday Buffer)", "test1_portion": "Magnetic Effects of Electric Current", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-11-02", "day": "Monday", "test1_subject": "Mathematics (Session 4)", "test1_portion": "Pair of Linear Equations in two variables", "test2_subject": "Social Science (Session 5)", "test2_portion": "His-5: Print Culture and The Modern World (1. The First Printed Books, 2. Print Comes to Europe, 5. The Nineteenth Century, 6. India and the World of Print, 7. Religious Reform and Public Debates, 8. New Forms of Publication, 9. Print and Censorship) | Map Work: Major Ports, International Airports" },
+      { "date": "2026-11-03", "day": "Tuesday", "test1_subject": "Physics (Session 3)", "test1_portion": "Light - Reflection & Refraction", "test2_subject": "English (Session 4)", "test2_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. VII-VIII | Writing: Analytical Paragraph - SWOT, Profiles | Literature: Prose - From the Diary of Anne Frank, Poem - How to Tell Wild Animals, SR - The Midnight Visitor" },
+      { "date": "2026-11-04", "day": "Wednesday", "test1_subject": "Chemistry (Session 3)", "test1_portion": "Carbon and its compounds - Part 3 (Chemical properties of carbon compounds, Ethyl alcohol, Ethanoic acid, Soaps and Detergents)", "test2_subject": "Tamil (Session 4)", "test2_portion": "துணைப்பாடம்: புயலிலே ஒரு தோணி, கோபல்லபுரத்து மக்கள், பிரும்மம் (1x10=10) | இலக்கணம்: சொல், தொகைநிலைத் தொடர்கள், தொகாநிலைத் தொடர்கள் (15x1=15) [Total: 25 Marks]" },
+      { "date": "2026-11-05", "day": "Thursday", "test1_subject": "Mathematics (Session 5)", "test1_portion": "Coordinate Geometry", "test2_subject": "Biology (Session 3)", "test2_portion": "Chapter 6: Control and Coordination" },
+      { "date": "2026-11-06", "day": "Friday", "test1_subject": "Social Science (Session 6)", "test1_portion": "His-1: The Rise of Nationalism in Europe; Geo-3: Water Resources | Map Work: Iron Ore Mines, Coal Mines & Oil Fields", "test2_subject": "Information Technology (Session 1)", "test2_portion": "IT Session 1 Revision (Part A & Part B Units - Customisable)" },
+      { "date": "2026-11-07", "day": "Saturday", "test1_subject": "Holiday", "test1_portion": "Diwali Vacation (07.11.2026 to 09.11.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-11-08", "day": "Sunday", "test1_subject": "Holiday", "test1_portion": "Diwali Vacation & Sunday (07.11.2026 to 09.11.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-11-09", "day": "Monday", "test1_subject": "Holiday", "test1_portion": "Diwali Vacation (07.11.2026 to 09.11.2026)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-11-10", "day": "Tuesday", "test1_subject": "Mathematics (Session 6)", "test1_portion": "Surface Areas and Volumes", "test2_subject": "English (Session 5)", "test2_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. IX-X | Writing: Letter of Placing an Order, Excerpts | Literature: Prose - Glimpses of India: I. A Baker from Goa, II. Coorg, III. Tea from Assam" },
+      { "date": "2026-11-11", "day": "Wednesday", "test1_subject": "Social Science (Session 7)", "test1_portion": "Eco-3: Money and Credit | Map Work: Cumulative", "test2_subject": "Tamil (Session 5)", "test2_portion": "இயல் - 4: உரைநடை: மொழிபெயர்ப்புக் கல்வி (1x5=5) | செய்யுள்: திருவிளையாடற் புராணம் (1x4=4) | துணைப்பாடம்: புதிய நம்பிக்கை (1x10=10) | இலக்கணம்: பொது (6x1=6) [Total: 25 Marks]" },
+      { "date": "2026-11-12", "day": "Thursday", "test1_subject": "Physics (Session 4)", "test1_portion": "Human Eye and the Colourful World", "test2_subject": "Chemistry (Session 4)", "test2_portion": "Acids, bases and salts & Metals and non-metals (Note: For Challengers SET D Acids, bases and salts Part 1, 3)" },
+      { "date": "2026-11-13", "day": "Friday", "test1_subject": "Mathematics (Session 7)", "test1_portion": "Circles", "test2_subject": "Biology (Session 4)", "test2_portion": "Chapter 7: How do organisms reproduce?" },
+      { "date": "2026-11-14", "day": "Saturday", "test1_subject": "Social Science (Session 8)", "test1_portion": "His-2: Nationalism in India | Map Work: INC Sessions, Important Centres of the National Movement, Thermal & Nuclear Power Plants", "test2_subject": "English (Session 6)", "test2_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. XI-XII | Writing: Analytical Paragraph - Pie chart, Profiles | Literature: Poem - The Ball Poem & Amanda!, SR - A Question of Trust & Footprints without Feet" },
+      { "date": "2026-11-15", "day": "Sunday", "test1_subject": "Mathematics (Session 8 - Sunday Cumulative Session)", "test1_portion": "Cumulative Session (Based on Session VI & VII: Surface Areas and Volumes, Circles) [Duration: 1 Hour | Max Marks: 30]", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-11-16", "day": "Monday", "test1_subject": "Tamil (Session 6)", "test1_portion": "இயல் - 5: உரைநடை: பன்முகக் கலைஞர் (1x5=5) | செய்யுள்: கம்பராமாயணம், திருக்குறள் (1x4=4) | துணைப்பாடம்: பாய்ச்சல் (1x10=10) | இலக்கணம்: அகப்பொருள் இலக்கணம் (6x1=6) [Total: 25 Marks]", "test2_subject": "Information Technology (Session 2)", "test2_portion": "IT Session 2 Revision (Part A & Part B Units - Customisable)" },
+      { "date": "2026-11-17", "day": "Tuesday", "test1_subject": "Mathematics (Session 9)", "test1_portion": "Areas Related to Circles + Arithmetic Progressions", "test2_subject": "Social Science (Session 9)", "test2_portion": "DP-1: Power Sharing; DP-2: Federalism | Map Work: Soil Types, Major Dams" },
+      { "date": "2026-11-18", "day": "Wednesday", "test1_subject": "Physics (Session 5)", "test1_portion": "Electricity", "test2_subject": "English (Session 7)", "test2_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. I-XII | Writing: Letter of Inquiry, Excerpts | Literature: Prose - Mijbil the Otter, Poem - The Trees, SR - The Making of a Scientist" },
+      { "date": "2026-11-19", "day": "Thursday", "test1_subject": "Biology (Session 5)", "test1_portion": "Chapter 8: Heredity & Chapter 13: Our Environment", "test2_subject": "Tamil (Session 7)", "test2_portion": "இயல் - 6: உரைநடை: சிற்றகல் ஒளி (1x5=5) | செய்யுள்: சிலப்பதிகாரம், முத்தொள்ளாயிரம் (1x4=4) | துணைப்பாடம்: மங்கையராய்ப் பிறப்பதற்கே (1x10=10) | இலக்கணம்: புறப்பொருள் இலக்கணம் (6x1=6) [Total: 25 Marks]" },
+      { "date": "2026-11-20", "day": "Friday", "test1_subject": "Mathematics (Session 10)", "test1_portion": "Quadratic Equations", "test2_subject": "Social Science (Session 10)", "test2_portion": "Geo-4: Agriculture; Geo-6: Manufacturing Industries | Map Work: Major Crops 'Rice, Wheat', Major producer states of Sugarcane, Tea, Coffee, Rubber, Cotton and Jute, Iron and Steel Plants" },
+      { "date": "2026-11-21", "day": "Saturday", "test1_subject": "English (Session 8)", "test1_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. I-XII | Writing: Analytical Paragraph - Bar Graph, Profiles | Literature: Prose - Madam Rides the Bus, Poem - Fog, SR - The Necklace", "test2_subject": "Tamil (Session 8)", "test2_portion": "இயல் - 7: உரைநடை: சங்க இலக்கியத்தில் அறம் (1x5=5) | செய்யுள்: தேம்பாவணி, அக்கறை (1x4=4) | துணைப்பாடம்: இராமானுசர் - நாடகம் (1x10=10) | இலக்கணம்: பா வகை, அலகிடுதல் (6x1=6) [Total: 25 Marks]" },
+      { "date": "2026-11-22", "day": "Sunday", "test1_subject": "Chemistry (Session 5 - 4th Sunday Buffer)", "test1_portion": "Periodic classification of elements (Note: For Challengers SET D Metals and non-metals Part 2, 3)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-11-23", "day": "Monday", "test1_subject": "Mathematics (Session 11)", "test1_portion": "Triangles", "test2_subject": "Social Science (Session 11)", "test2_portion": "DP-5: Outcomes of Democracy | Map Work: Software Techno Parks, Cotton Textiles" },
+      { "date": "2026-11-24", "day": "Tuesday", "test1_subject": "English (Session 9)", "test1_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. I-XII | Writing: Analytical Paragraph - Report writing, Excerpts | Literature: Prose - The Sermon at Benares, Poem - The Tale of Custard the Dragon, SR - Bholi", "test2_subject": "Tamil (Session 9)", "test2_portion": "காட்சியைக் கண்டு கவினுற எழுதுக (2x3=6) | நிரப்புக - இயல் 3 (6x1=6) | பத்தி வினா - சுருக்கமான விடை (5x1=5) | கடிதம்/விண்ணப்பம் (1x8=8) [Total: 25 Marks]" },
+      { "date": "2026-11-25", "day": "Wednesday", "test1_subject": "Mathematics (Session 12)", "test1_portion": "Some Applications of Trigonometry", "test2_subject": "Social Science (Session 12)", "test2_portion": "Geo-5: Minerals And Energy Resources | Map Work: Iron Ore Mines, Coal Mines & Oil Fields" },
+      { "date": "2026-11-26", "day": "Thursday", "test1_subject": "English (Session 10)", "test1_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. I-XII | Writing: Analytical Paragraph - Line Graph, Map & Profiles | Literature: Prose - The Proposal (Play), Poem - For Anne Gregory, SR - The Book that Saved the Earth", "test2_subject": "Information Technology (Session 3)", "test2_portion": "IT Session 3 Revision (Part A & Part B Units - Customisable)" },
+      { "date": "2026-11-27", "day": "Friday", "test1_subject": "Mathematics (Session 13)", "test1_portion": "Statistics + Probability", "test2_subject": "Social Science (Session 13)", "test2_portion": "Eco-2: Sectors of the Indian Economy | Map Work: Major Ports, International Airports" },
+      { "date": "2026-11-28", "day": "Saturday", "test1_subject": "Tamil (Session 10)", "test1_portion": "பொதுக்கட்டுரை (1x6=6) | கடிதம்/விண்ணப்பம் (1x8=8) | நிரப்புக - இயல் 5 (11x1=11) [Total: 25 Marks]", "test2_subject": "Social Science (Session 14)", "test2_portion": "DP-4: Political Parties; His-3: The Making of a Global World (1.1-1.3) | Map Work: Cumulative" },
+      { "date": "2026-11-29", "day": "Sunday", "test1_subject": "Sunday Holiday", "test1_portion": "Self-Study & Buffer Revision", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-11-30", "day": "Monday", "test1_subject": "Life Skills Motivation", "test1_portion": "1 Day for Life Skills Motivation Session", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-12-01", "day": "Tuesday", "test1_subject": "Review & Error Rectification (Day 1)", "test1_portion": "All Subjects' Review & Error Rectification (01.12.2026 to 03.12.2026)", "test2_subject": "Review & Error Rectification (Day 1 - Evening)", "test2_portion": "All Subjects' Review & Error Rectification" },
+      { "date": "2026-12-02", "day": "Wednesday", "test1_subject": "Review & Error Rectification (Day 2)", "test1_portion": "All Subjects' Review & Error Rectification (01.12.2026 to 03.12.2026)", "test2_subject": "Review & Error Rectification (Day 2 - Evening)", "test2_portion": "All Subjects' Review & Error Rectification" },
+      { "date": "2026-12-03", "day": "Thursday", "test1_subject": "Review & Error Rectification (Day 3)", "test1_portion": "All Subjects' Review & Error Rectification (01.12.2026 to 03.12.2026)", "test2_subject": "Review & Error Rectification (Day 3 - Evening)", "test2_portion": "All Subjects' Review & Error Rectification" },
+      { "date": "2026-12-04", "day": "Friday", "test1_subject": "Pre-Final 2 Preparation", "test1_portion": "Preparation for Pre-Final 2 First Exam (Social Science)", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-12-05", "day": "Saturday", "test1_subject": "Pre-Final 2 Exam: Social Science", "test1_portion": "Full Syllabus (100%) | Exam Time: 10:15 A.M to 01:30 P.M", "test2_subject": "Preparation for English", "test2_portion": "Revision for Pre-Final 2 English Exam" },
+      { "date": "2026-12-06", "day": "Sunday", "test1_subject": "Pre-Final 2 Preparation", "test1_portion": "Full Day Preparation for Pre-Final 2 English Exam", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-12-07", "day": "Monday", "test1_subject": "Pre-Final 2 Exam: English", "test1_portion": "Full Syllabus (100%) | Exam Time: 10:15 A.M to 01:30 P.M", "test2_subject": "Preparation for Science", "test2_portion": "Revision for Pre-Final 2 Science Exam" },
+      { "date": "2026-12-08", "day": "Tuesday", "test1_subject": "Pre-Final 2 Preparation", "test1_portion": "Full Day Preparation for Pre-Final 2 Science Exam", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-12-09", "day": "Wednesday", "test1_subject": "Pre-Final 2 Exam: Science", "test1_portion": "Full Syllabus (Physics, Chemistry, Biology - 100%) | Exam Time: 10:15 A.M to 01:30 P.M", "test2_subject": "Preparation for Second Language (Tamil)", "test2_portion": "Revision for Pre-Final 2 Second Language Exam" },
+      { "date": "2026-12-10", "day": "Thursday", "test1_subject": "Pre-Final 2 Preparation", "test1_portion": "Full Day Preparation for Pre-Final 2 Second Language (Tamil) Exam", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-12-11", "day": "Friday", "test1_subject": "Pre-Final 2 Exam: Second Language (Tamil)", "test1_portion": "Full Syllabus (100%) | Exam Time: 10:15 A.M to 01:30 P.M", "test2_subject": "Preparation for Information Technology", "test2_portion": "Revision for Pre-Final 2 Information Technology Exam" },
+      { "date": "2026-12-12", "day": "Saturday", "test1_subject": "Pre-Final 2 Exam: Information Technology", "test1_portion": "Full Syllabus (100%) | Exam Time: 10:15 A.M to 12:30 P.M", "test2_subject": "Preparation for Mathematics", "test2_portion": "Revision for Pre-Final 2 Mathematics Exam" },
+      { "date": "2026-12-13", "day": "Sunday", "test1_subject": "Pre-Final 2 Preparation", "test1_portion": "Full Day Preparation for Pre-Final 2 Mathematics Exam", "test2_subject": null, "test2_portion": null },
+      { "date": "2026-12-14", "day": "Monday", "test1_subject": "Pre-Final 2 Exam: Mathematics", "test1_portion": "Full Syllabus (100%) | Exam Time: 12:45 P.M to 04:00 P.M", "test2_subject": "Answer Script Distribution & Analysis", "test2_portion": "Distribution of Answer Scripts with complete Analysis and Remedial (Starts 14.12.2026 Afternoon)" },
+      { "date": "2026-12-15", "day": "Tuesday", "test1_subject": "Answer Script Analysis & Remedial", "test1_portion": "Distribution of Answer Scripts with complete Analysis and Remedial", "test2_subject": null, "test2_portion": null }
     ];
 
+    // App State
     let state = {
       theme: localStorage.getItem('p2_theme') || 'dark',
-      schedule: JSON.parse(localStorage.getItem('p2_schedule_v2')) || DEFAULT_SCHEDULE,
+      schedule: JSON.parse(localStorage.getItem('p2_schedule')) || DEFAULT_SCHEDULE,
       checks: JSON.parse(localStorage.getItem('p2_checks')) || {},
-      meta: JSON.parse(localStorage.getItem('p2_meta')) || {},
-      masterDrive: localStorage.getItem('p2_master_drive') || 'schedule.pdf',
-      morningTime: localStorage.getItem('p2_morning_time') || '11:45',
-      eveningTime: localStorage.getItem('p2_evening_time') || '04:15',
+      meta: JSON.parse(localStorage.getItem('p2_meta')) || {}, // { "2026-10-22_morning": { pdf: "", score: "" } }
+      masterDrive: localStorage.getItem('p2_master_drive') || '',
+      morningTime: localStorage.getItem('p2_morning_time') || '09:00',
+      eveningTime: localStorage.getItem('p2_evening_time') || '14:30',
       vault: JSON.parse(localStorage.getItem('p2_vault')) || [],
-      profile: JSON.parse(localStorage.getItem('p2_profile')) || { name: 'The Rock', section: '10th X' },
+      profile: JSON.parse(localStorage.getItem('p2_profile')) || { name: '', section: '' },
       activeTab: 0,
       selectedDate: '',
       activeSheetSlot: 'morning'
@@ -958,7 +997,7 @@
 
     function saveState() {
       localStorage.setItem('p2_theme', state.theme);
-      localStorage.setItem('p2_schedule_v2', JSON.stringify(state.schedule));
+      localStorage.setItem('p2_schedule', JSON.stringify(state.schedule));
       localStorage.setItem('p2_checks', JSON.stringify(state.checks));
       localStorage.setItem('p2_meta', JSON.stringify(state.meta));
       localStorage.setItem('p2_master_drive', state.masterDrive);
@@ -968,6 +1007,7 @@
       localStorage.setItem('p2_profile', JSON.stringify(state.profile));
     }
 
+    // Format YYYY-MM-DD in local time
     function toLocalISODate(d) {
       const y = d.getFullYear();
       const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -979,54 +1019,54 @@
       return toLocalISODate(new Date());
     }
 
-    function applyTheme() {
-      document.documentElement.setAttribute('data-theme', state.theme);
-      const btn = document.getElementById('themeToggleBtn');
-      if (btn) btn.textContent = state.theme === 'dark' ? '☀️ Warm Cream' : '🌙 Obsidian Dark';
+    function getRealTomorrowISO() {
+      const d = new Date();
+      d.setDate(d.getDate() + 1);
+      return toLocalISODate(d);
     }
 
-    function toggleTheme() {
+    // Initialize Theme
+    function applyTheme() {
+      document.documentElement.setAttribute('data-theme', state.theme);
+      document.getElementById('themeIcon').textContent = state.theme === 'dark' ? '☀️ Cream' : '🌙 Dark';
+    }
+
+    document.getElementById('themeToggleBtn').addEventListener('click', () => {
       state.theme = state.theme === 'dark' ? 'cream' : 'dark';
       applyTheme();
       saveState();
-    }
+    });
 
+    // Live Clock & Next Scheduled Test Countdown
     function isRealTestSubject(subj) {
       if (!subj) return false;
       const lower = subj.toLowerCase();
-      return !lower.includes('vacation') && !lower.includes('holiday') && !lower.includes('motivation');
+      return !lower.includes('holiday') && !lower.includes('vacation') && !lower.includes('motivation');
     }
 
     function updateClockAndCountdown() {
       const now = new Date();
-      const activeRec = getDayRecord(state.selectedDate);
-      const isViewingToday = state.selectedDate === getRealTodayISO();
-
-      const realDateStr = now.toLocaleDateString('en-IN', {
+      document.getElementById('realDateDisplay').textContent = now.toLocaleDateString('en-IN', {
         weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'
       });
-
-      document.getElementById('realDateDisplay').textContent = isViewingToday
-        ? realDateStr
-        : `${realDateStr} • Viewing ${activeRec.date}`;
-
       document.getElementById('realTimeDisplay').textContent = now.toLocaleTimeString('en-IN', {
         hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit'
       });
 
+      // Find next upcoming test across schedule
       let nextEvent = null;
       for (const item of state.schedule) {
         if (isRealTestSubject(item.test1_subject)) {
           const dt1 = new Date(`${item.date}T${state.morningTime}:00`);
           if (dt1 > now) {
-            nextEvent = { dt: dt1, label: `${item.test1_subject}` };
+            nextEvent = { dt: dt1, label: `${item.test1_subject} (${item.date})` };
             break;
           }
         }
         if (isRealTestSubject(item.test2_subject)) {
           const dt2 = new Date(`${item.date}T${state.eveningTime}:00`);
           if (dt2 > now) {
-            nextEvent = { dt: dt2, label: `${item.test2_subject}` };
+            nextEvent = { dt: dt2, label: `${item.test2_subject} (${item.date})` };
             break;
           }
         }
@@ -1040,20 +1080,20 @@
         const h = String(Math.floor((diff % 86400) / 3600)).padStart(2, '0');
         const m = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
         const s = String(diff % 60).padStart(2, '0');
-        labelEl.textContent = `Next: ${nextEvent.label}`;
+        labelEl.textContent = `Next Test: ${nextEvent.label}`;
         timerEl.textContent = `${d}d : ${h}h : ${m}m : ${s}s`;
       } else {
-        labelEl.textContent = 'Phase-2 Completed';
+        labelEl.textContent = 'All Phase-2 Scheduled Tests Completed!';
         timerEl.textContent = '00d : 00h : 00m : 00s';
       }
     }
 
-    // Swipe Navigation
+    // Tab Navigation & Touch Swiping
     function goToTab(idx) {
       state.activeTab = Math.max(0, Math.min(3, idx));
       document.getElementById('swipeTrack').style.transform = `translateX(-${state.activeTab * 25}%)`;
-      document.querySelectorAll('.nav-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === state.activeTab);
+      document.querySelectorAll('.tab-pill').forEach((btn, i) => {
+        btn.classList.toggle('active', i === state.activeTab);
       });
     }
 
@@ -1068,7 +1108,7 @@
     viewport.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].screenX - touchStartX;
       const dy = e.changedTouches[0].screenY - touchStartY;
-      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.4) {
         if (dx < 0) goToTab(state.activeTab + 1);
         else goToTab(state.activeTab - 1);
       }
@@ -1080,6 +1120,7 @@
       if (e.key === 'ArrowLeft') goToTab(state.activeTab - 1);
     });
 
+    // Focus View Rendering (Tab 1)
     function getDayRecord(dateStr) {
       let rec = state.schedule.find(d => d.date === dateStr);
       if (!rec) {
@@ -1089,11 +1130,9 @@
           date: dateStr,
           day: dayName,
           test1_subject: 'No Scheduled Test',
-          test1_portion: 'Swipe to Tab 2 to select a scheduled date or customize this day.',
+          test1_portion: 'Tap "Edit This Day\'s Schedule" below to assign a custom subject & portion.',
           test2_subject: null,
-          test2_portion: null,
-          fat_subject: 'No FAT Assigned',
-          fat_portion: 'Tap Edit in Tab 2 to add a custom FAT/Funwork portion.'
+          test2_portion: null
         };
       }
       return rec;
@@ -1114,20 +1153,36 @@
 
     function renderFocusDay() {
       const rec = getDayRecord(state.selectedDate);
+      const todayISO = getRealTodayISO();
+      const tomorrowISO = getRealTomorrowISO();
+
+      const headingEl = document.getElementById('focusHeading');
+      if (state.selectedDate === tomorrowISO) headingEl.textContent = "Tomorrow's Plan";
+      else if (state.selectedDate === todayISO) headingEl.textContent = "Today's Plan";
+      else headingEl.textContent = `${rec.day}'s Plan`;
+
+      const prettyDate = new Date(`${rec.date}T00:00:00`).toLocaleDateString('en-IN', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+      });
+      document.getElementById('focusSubDate').textContent = prettyDate;
+
+      document.getElementById('btnToday').classList.toggle('active', state.selectedDate === todayISO);
+      document.getElementById('btnTomorrow').classList.toggle('active', state.selectedDate === tomorrowISO);
+      document.getElementById('btnDay1').classList.toggle('active', state.selectedDate === '2026-10-22');
 
       document.getElementById('morningTimeLabel').textContent = format12Hour(state.morningTime);
       document.getElementById('eveningTimeLabel').textContent = format12Hour(state.eveningTime);
 
-      // Card 1: Morning
+      // Morning Card
       document.getElementById('morningSubject').textContent = rec.test1_subject || 'Free Slot';
       document.getElementById('morningPreview').textContent = rec.test1_portion || 'No portion assigned';
       const mItems = splitPortionItems(rec.test1_portion);
       const mChecked = mItems.filter((_, idx) => state.checks[`${rec.date}_morning_${idx}`]).length;
       const mScore = state.meta[`${rec.date}_morning`]?.score;
       document.getElementById('morningProgressText').textContent =
-        mScore ? `Scored: ${mScore}/25` : `${mChecked}/${mItems.length} Completed`;
+        mScore ? `Scored: ${mScore}/25 • Tap for details` : `Checklist: ${mChecked}/${mItems.length} • Tap to open`;
 
-      // Card 2: Evening
+      // Evening Card
       const eveningBtn = document.getElementById('eveningBigBtn');
       if (rec.test2_subject) {
         eveningBtn.classList.remove('disabled-slot');
@@ -1137,78 +1192,53 @@
         const eChecked = eItems.filter((_, idx) => state.checks[`${rec.date}_evening_${idx}`]).length;
         const eScore = state.meta[`${rec.date}_evening`]?.score;
         document.getElementById('eveningProgressText').textContent =
-          eScore ? `Scored: ${eScore}/25` : `${eChecked}/${eItems.length} Completed`;
+          eScore ? `Scored: ${eScore}/25 • Tap for details` : `Checklist: ${eChecked}/${eItems.length} • Tap to open`;
       } else {
         eveningBtn.classList.add('disabled-slot');
         document.getElementById('eveningSubject').textContent = 'No Evening Test';
-        document.getElementById('eveningPreview').textContent = 'Self-study / Buffer slot';
-        document.getElementById('eveningProgressText').textContent = 'Tap to view details';
+        document.getElementById('eveningPreview').textContent = 'Self-study / Funwork / Buffer Revision. Tap to assign a custom test.';
+        document.getElementById('eveningProgressText').textContent = 'Tap to view or assign portion';
       }
-
-      // Card 3: FAT Exam & Funwork
-      const fatSub = rec.fat_subject || 'Funwork & FAT Prep';
-      const fatPortion = rec.fat_portion || 'Review daily Funwork worksheets';
-      document.getElementById('fatSubject').textContent = fatSub;
-      document.getElementById('fatPreview').textContent = fatPortion;
-      const fItems = splitPortionItems(fatPortion);
-      const fChecked = fItems.filter((_, idx) => state.checks[`${rec.date}_fat_${idx}`]).length;
-      const fScore = state.meta[`${rec.date}_fat`]?.score;
-      document.getElementById('fatProgressText').textContent =
-        fScore ? `Scored: ${fScore}/20` : `${fChecked}/${fItems.length} Completed`;
     }
 
     function setQuickDate(mode) {
       if (mode === 'today') state.selectedDate = getRealTodayISO();
+      else if (mode === 'tomorrow') state.selectedDate = getRealTomorrowISO();
       else state.selectedDate = mode;
       renderFocusDay();
-      renderTimeline();
-      goToTab(0);
     }
 
-    function getPaperPatternForSlot(slot, subj) {
-      if (slot === 'fat') {
-        const s = (subj || '').toLowerCase();
-        if (s.includes('physics')) {
-          return 'Physics FAT Blueprint (30 Min | 20 Marks): 12×1=12M MCQ • 4×1=4M Assertion/Reason • 1×4=4M Case-Based';
-        }
-        if (s.includes('tamil')) {
-          return 'Tamil FAT Blueprint (30 Min | 20 Marks): Based on assigned Funwork pairs (20 Marks)';
-        }
-        return 'FAT Exam Blueprint (30 Min | 20 Marks): Sec A: 11×1=11M (incl. 4 A/R) • Sec B: 1×4=4M Case Study • Sec C: 1×5=5M Skill Based';
-      }
-      if (!subj) return 'Session Exam: 50 Mins | 25 Marks';
+    function stepDate(delta) {
+      const d = new Date(`${state.selectedDate}T00:00:00`);
+      d.setDate(d.getDate() + delta);
+      state.selectedDate = toLocalISODate(d);
+      renderFocusDay();
+    }
+
+    // Portion Modal Sheet
+    function getPaperPatternForSubject(subj) {
+      if (!subj) return 'Standard Session Exam: 50 Mins | 25 Marks';
       const s = subj.toLowerCase();
       if (s.includes('cumulative')) {
-        return 'Cumulative Exam Blueprint (60 Min | 30 Marks): Sec A: 8×1=8M (incl. 2 A/R) • Sec B: 2×2=4M • Sec C: 3×3=9M • Sec D: 1×5=5M • Sec E: 1×4=4M';
+        return 'Cumulative Exam Blueprint (60 Min | 30 Marks): Sec A: 8×1=8M (incl. 2 A/R) • Sec B: 2×2=4M • Sec C: 3×3=9M • Sec D: 1×5=5M • Sec E: 1×4=4M (Case Study)';
       }
       if (s.includes('physics')) {
         return 'Physics Session Blueprint (50 Min | 25 Marks): MCQ: 5×1=5M • A/R: 3×1=3M • SA-I: 1×2=2M • SA-II: 2×3=6M • Case-Based: 1×4=4M • LA: 1×5=5M';
       }
-      return 'Session Exam Blueprint (50 Min | 25 Marks): Sec A: 6×1=6M (incl. 2 A/R) • Sec B: 2×2=4M • Sec C: 2×3=6M • Sec D: 1×5=5M • Sec E: 1×4=4M';
+      if (s.includes('pre-final')) {
+        return 'Pre-Final 2 Board Pattern: 80 Marks (IT: 50 Marks) | Full 100% Syllabus';
+      }
+      return 'Session Exam Blueprint (50 Min | 25 Marks): Sec A: 6×1=6M (incl. 2 A/R) • Sec B: 2×2=4M • Sec C: 2×3=6M • Sec D: 1×5=5M • Sec E: 1×4=4M (Case Study)';
     }
 
     function openPortionSheet(slot) {
       state.activeSheetSlot = slot;
       const rec = getDayRecord(state.selectedDate);
-      let subj = '';
-      let portion = '';
-      let badge = '';
+      const isMorning = slot === 'morning';
+      const subj = isMorning ? (rec.test1_subject || 'Morning Slot') : (rec.test2_subject || 'No Evening Test Assigned');
+      const portion = isMorning ? (rec.test1_portion || '') : (rec.test2_portion || 'No evening test scheduled. You can use this slot for Funwork or tap "Edit This Day\'s Schedule" to add a test.');
 
-      if (slot === 'morning') {
-        subj = rec.test1_subject || 'Morning Slot';
-        portion = rec.test1_portion || '';
-        badge = `☀️ MORNING TEST (${format12Hour(state.morningTime)})`;
-      } else if (slot === 'evening') {
-        subj = rec.test2_subject || 'No Evening Test';
-        portion = rec.test2_portion || 'Self-study / Funwork slot.';
-        badge = `🌙 EVENING TEST (${format12Hour(state.eveningTime)})`;
-      } else {
-        subj = rec.fat_subject || 'FAT Exam & Funwork';
-        portion = rec.fat_portion || '';
-        badge = '⚡ FAT EXAM & FUNWORK (30 MIN • 20M)';
-      }
-
-      document.getElementById('sheetSlotBadge').textContent = badge;
+      document.getElementById('sheetSlotBadge').textContent = isMorning ? `☀️ MORNING TEST (${format12Hour(state.morningTime)})` : `🌙 EVENING TEST (${format12Hour(state.eveningTime)})`;
       document.getElementById('sheetSubjectTitle').textContent = subj;
       document.getElementById('sheetDateSub').textContent = `${rec.day}, ${rec.date}`;
 
@@ -1234,7 +1264,7 @@
         container.appendChild(label);
       });
 
-      document.getElementById('sheetPatternBox').textContent = getPaperPatternForSlot(slot, subj);
+      document.getElementById('sheetPatternBox').textContent = getPaperPatternForSubject(subj);
 
       const metaKey = `${rec.date}_${slot}`;
       const slotMeta = state.meta[metaKey] || { pdf: '', score: '' };
@@ -1263,21 +1293,22 @@
       const metaKey = `${state.selectedDate}_${state.activeSheetSlot}`;
       const url = state.meta[metaKey]?.pdf || state.masterDrive;
       if (url) window.open(url, '_blank');
-      else alert('Paste a PDF link below or save your Master Google Drive link in Tab 3 first.');
+      else alert('Paste a session PDF link below or save your Master Google Drive Folder link in Tab 3 first!');
     }
 
-    // Tab 1: Schedule List
+    // Tab 2: Timeline & Custom Schedule Builder
     function renderTimeline() {
       const q = (document.getElementById('scheduleSearch').value || '').toLowerCase();
       const list = document.getElementById('timelineList');
       list.innerHTML = '';
+      const todayISO = getRealTodayISO();
 
       state.schedule.forEach(item => {
-        const hay = `${item.date} ${item.day} ${item.test1_subject} ${item.test1_portion} ${item.test2_subject || ''} ${item.fat_subject || ''} ${item.fat_portion || ''}`.toLowerCase();
+        const hay = `${item.date} ${item.day} ${item.test1_subject} ${item.test1_portion} ${item.test2_subject || ''} ${item.test2_portion || ''}`.toLowerCase();
         if (q && !hay.includes(q)) return;
 
         const row = document.createElement('div');
-        row.className = `timeline-item ${item.date === state.selectedDate ? 'is-selected' : ''}`;
+        row.className = `timeline-item ${item.date === todayISO ? 'is-today' : ''}`;
         row.innerHTML = `
           <div class="tl-date">
             <strong class="mono">${item.date}</strong>
@@ -1286,13 +1317,11 @@
           <div class="tl-slots">
             <span class="mini-chip">☀️ ${item.test1_subject || 'None'}</span>
             ${item.test2_subject ? `<span class="mini-chip">🌙 ${item.test2_subject}</span>` : ''}
-            ${item.fat_subject ? `<span class="mini-chip">⚡ ${item.fat_subject}</span>` : ''}
           </div>
         `;
         row.addEventListener('click', () => {
           state.selectedDate = item.date;
           renderFocusDay();
-          renderTimeline();
           goToTab(0);
         });
         list.appendChild(row);
@@ -1303,11 +1332,9 @@
       if (!val) return;
       state.selectedDate = val;
       renderFocusDay();
-      renderTimeline();
       goToTab(0);
     }
 
-    // Edit Day Schedule Modal
     function openEditDayModal() {
       const rec = getDayRecord(state.selectedDate);
       document.getElementById('editModalDateLabel').textContent = `${rec.day}, ${rec.date}`;
@@ -1315,9 +1342,15 @@
       document.getElementById('editT1Portion').value = rec.test1_portion || '';
       document.getElementById('editT2Sub').value = rec.test2_subject || '';
       document.getElementById('editT2Portion').value = rec.test2_portion || '';
-      document.getElementById('editFatSub').value = rec.fat_subject || '';
-      document.getElementById('editFatPortion').value = rec.fat_portion || '';
       document.getElementById('editDayModal').classList.add('open');
+    }
+
+    function openAddCustomDayModal() {
+      const customDate = prompt('Enter date (YYYY-MM-DD):', state.selectedDate);
+      if (!customDate) return;
+      state.selectedDate = customDate;
+      renderFocusDay();
+      openEditDayModal();
     }
 
     function closeEditDayModal() {
@@ -1329,26 +1362,14 @@
       const t1p = document.getElementById('editT1Portion').value.trim();
       const t2s = document.getElementById('editT2Sub').value.trim() || null;
       const t2p = document.getElementById('editT2Portion').value.trim() || null;
-      const fs = document.getElementById('editFatSub').value.trim() || null;
-      const fp = document.getElementById('editFatPortion').value.trim() || null;
 
       const idx = state.schedule.findIndex(d => d.date === state.selectedDate);
       const dayName = new Date(`${state.selectedDate}T00:00:00`).toLocaleDateString('en-US', { weekday: 'long' });
 
-      const updated = {
-        date: state.selectedDate,
-        day: dayName,
-        test1_subject: t1s,
-        test1_portion: t1p,
-        test2_subject: t2s,
-        test2_portion: t2p,
-        fat_subject: fs,
-        fat_portion: fp
-      };
-
-      if (idx >= 0) state.schedule[idx] = updated;
-      else {
-        state.schedule.push(updated);
+      if (idx >= 0) {
+        state.schedule[idx] = { ...state.schedule[idx], test1_subject: t1s, test1_portion: t1p, test2_subject: t2s, test2_portion: t2p };
+      } else {
+        state.schedule.push({ date: state.selectedDate, day: dayName, test1_subject: t1s, test1_portion: t1p, test2_subject: t2s, test2_portion: t2p });
         state.schedule.sort((a, b) => a.date.localeCompare(b.date));
       }
 
@@ -1359,7 +1380,7 @@
     }
 
     function resetScheduleToDefault() {
-      if (confirm('Reset all dates to the official Phase-2 PDF schedule?')) {
+      if (confirm('Reset the entire Phase-2 schedule back to the default PDF schedule?')) {
         state.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
         saveState();
         renderFocusDay();
@@ -1368,27 +1389,69 @@
       }
     }
 
+    // Real-Life Calendar Sync (Google Calendar URL & .ICS file download)
     function syncDayToGoogleCalendar() {
       const rec = getDayRecord(state.selectedDate);
       const dClean = rec.date.replace(/-/g, '');
       const title = encodeURIComponent(`Phase-2: ${rec.test1_subject}${rec.test2_subject ? ' & ' + rec.test2_subject : ''}`);
-      const details = encodeURIComponent(`Morning: ${rec.test1_subject}\nPortion: ${rec.test1_portion}\n\nEvening: ${rec.test2_subject || 'None'}\nPortion: ${rec.test2_portion || 'N/A'}\n\nFAT: ${rec.fat_subject || ''}\n${rec.fat_portion || ''}`);
-      window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dClean}T033000Z/${dClean}T113000Z&details=${details}`, '_blank');
+      const details = encodeURIComponent(`Morning: ${rec.test1_subject}\nPortion: ${rec.test1_portion}\n\nEvening: ${rec.test2_subject || 'None'}\nPortion: ${rec.test2_portion || 'N/A'}`);
+      const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dClean}T033000Z/${dClean}T113000Z&details=${details}`;
+      window.open(gcalUrl, '_blank');
     }
 
-    // Tab 2: Master Drive
+    function downloadICSForDay() {
+      const rec = getDayRecord(state.selectedDate);
+      const dClean = rec.date.replace(/-/g, '');
+      const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Phase2Companion//EN',
+        'BEGIN:VEVENT',
+        `DTSTART:${dClean}T090000`,
+        `DTEND:${dClean}T100000`,
+        `SUMMARY:Morning Test: ${rec.test1_subject}`,
+        `DESCRIPTION:${(rec.test1_portion || '').replace(/\n/g, ' ')}`,
+        'END:VEVENT',
+        ...(rec.test2_subject ? [
+          'BEGIN:VEVENT',
+          `DTSTART:${dClean}T143000`,
+          `DTEND:${dClean}T153000`,
+          `SUMMARY:Evening Test: ${rec.test2_subject}`,
+          `DESCRIPTION:${(rec.test2_portion || '').replace(/\n/g, ' ')}`,
+          'END:VEVENT'
+        ] : []),
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `Phase2_${rec.date}.ics`;
+      link.click();
+    }
+
+    // Tab 3: Master Drive & Test Timings
     function saveMasterDrive() {
       state.masterDrive = document.getElementById('masterDriveInput').value.trim();
       saveState();
+      alert('Master Google Drive folder link saved!');
     }
 
     function openMasterDrive() {
       if (state.masterDrive) window.open(state.masterDrive, '_blank');
-      else alert('Paste your Google Drive folder link first.');
+      else alert('Please paste your Google Drive folder link first.');
     }
 
-    // Tab 3: Simulator Timer & Error Vault
-    let simSeconds = 30 * 60;
+    function saveTestTimes() {
+      state.morningTime = document.getElementById('morningTimeInput').value || '09:00';
+      state.eveningTime = document.getElementById('eveningTimeInput').value || '14:30';
+      saveState();
+      renderFocusDay();
+      updateClockAndCountdown();
+    }
+
+    // Tab 4: Exam Simulator Timer & Error Rectification Vault
+    let simSeconds = 50 * 60;
     let simInterval = null;
 
     function renderSimTimer() {
@@ -1418,7 +1481,7 @@
           } else {
             clearInterval(simInterval);
             simInterval = null;
-            alert('⏰ Exam time is up!');
+            alert('⏰ Time is up! Put your pen down and check your answers.');
           }
         }, 1000);
       }
@@ -1428,7 +1491,7 @@
       const container = document.getElementById('vaultListContainer');
       container.innerHTML = '';
       if (state.vault.length === 0) {
-        container.innerHTML = `<p style="font-size:0.78rem; color:var(--text-muted);">No errors logged yet.</p>`;
+        container.innerHTML = `<p style="font-size:0.8rem; color:var(--text-muted);">No errors logged yet. Add tricky topics here to review on Dec 1–3.</p>`;
         return;
       }
       state.vault.forEach((v, i) => {
@@ -1436,7 +1499,7 @@
         div.className = 'vault-item';
         div.innerHTML = `
           <span>${v}</span>
-          <button class="icon-btn" onclick="removeVaultItem(${i})">✓</button>
+          <button class="icon-btn" onclick="removeVaultItem(${i})" title="Mark Rectified">✓ Resolved</button>
         `;
         container.appendChild(div);
       });
@@ -1458,30 +1521,30 @@
       renderVault();
     }
 
-    // Settings Modal (⚙️)
-    document.getElementById('settingsBtn').addEventListener('click', () => {
+    // Login / Profile Modal
+    document.getElementById('loginBtn').addEventListener('click', () => {
       document.getElementById('profileNameInput').value = state.profile.name || '';
       document.getElementById('profileSectionInput').value = state.profile.section || '';
-      document.getElementById('morningTimeInput').value = state.morningTime;
-      document.getElementById('eveningTimeInput').value = state.eveningTime;
-      document.getElementById('settingsModal').classList.add('open');
+      document.getElementById('loginModal').classList.add('open');
     });
 
-    function closeSettingsModal() {
-      document.getElementById('settingsModal').classList.remove('open');
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('open');
     }
 
-    function saveSettings() {
+    function renderProfileBadge() {
+      const txt = state.profile.name ? `👤 ${state.profile.name}` : '👤 Sign In';
+      document.getElementById('userStatusText').textContent = txt;
+    }
+
+    function saveUserProfile() {
       state.profile = {
-        name: document.getElementById('profileNameInput').value.trim() || 'Adhityan',
-        section: document.getElementById('profileSectionInput').value.trim() || 'X - CBSE'
+        name: document.getElementById('profileNameInput').value.trim(),
+        section: document.getElementById('profileSectionInput').value.trim()
       };
-      state.morningTime = document.getElementById('morningTimeInput').value || '09:00';
-      state.eveningTime = document.getElementById('eveningTimeInput').value || '14:30';
       saveState();
-      renderFocusDay();
-      updateClockAndCountdown();
-      closeSettingsModal();
+      renderProfileBadge();
+      closeLoginModal();
     }
 
     function exportBackupJSON() {
@@ -1502,7 +1565,8 @@
           state = { ...state, ...imported };
           saveState();
           initApp();
-          closeSettingsModal();
+          closeLoginModal();
+          alert('Backup restored!');
         } catch (err) {
           alert('Invalid backup JSON file.');
         }
@@ -1510,10 +1574,14 @@
       reader.readAsText(file);
     }
 
+    // Boot App (Default view = Tomorrow's Plan)
     function initApp() {
       applyTheme();
-      state.selectedDate = getRealTodayISO();
+      state.selectedDate = getRealTomorrowISO();
       document.getElementById('masterDriveInput').value = state.masterDrive;
+      document.getElementById('morningTimeInput').value = state.morningTime;
+      document.getElementById('eveningTimeInput').value = state.eveningTime;
+      renderProfileBadge();
       renderFocusDay();
       renderTimeline();
       renderVault();
