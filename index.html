@@ -876,6 +876,10 @@
   </div>
 
   <script>
+    if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+    .then(() => console.log('Service Worker Registered!'));
+}
     // COMPLETE PHASE-2 SCHEDULE (OCT 15 TO DEC 15, 2026) WITH FAT EXAMS & FUNWORKS MAPPED FROM PDF
     const DEFAULT_SCHEDULE = [
       { "date": "2026-10-15", "day": "Thursday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Study Hour / Funwork Prep", "fat_portion": "Phase-II Preliminary Study Hours" },
