@@ -1,0 +1,32 @@
+{
+  "background_color": "#f6e5e5",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "PHASE-II",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "PHASE-II",
+  "start_url": "/",
+  "theme_color": "#f6e5e5",
+  "icons": [
+    {
+      "src": "https://adhityan1102.github.io/PHASE-II/icon.png",
+      "type": "image/png",
+      "sizes": "1600x1600",
+      "isSquare": true,
+      "isPng": true,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 1600,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "id": "PHASE",
+  "description": "This is a Phase 2 study planner/calendar for students of Sri Chaitanya Techno School Trichy",
+  "lang": "en",
+  "categories": [
+    "utilities"
+  ]
+}
