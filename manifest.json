@@ -3,14 +3,13 @@
   "id": "/PHASE-II/",
   "name": "PHASE - II Revision Companion",
   "short_name": "PHASE - II",
-  "description": "Phase 2 study planner and revision companion for Class 10 CBSE students of Sri Chaitanya Techno School, Trichy.",
+  "description": "This is a Phase 2 study planner/calendar for students of Sri Chaitanya Techno School Trichy",
   "lang": "en",
   "dir": "ltr",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "display_override": [
-    "fullscreen",
     "window-controls-overlay",
     "standalone"
   ],
@@ -22,31 +21,92 @@
     "productivity",
     "utilities"
   ],
+  "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
   "prefer_related_applications": false,
+  "related_applications": [],
+  "scope_extensions": [
+    {
+      "origin": "https://adhityan1102.github.io"
+    }
+  ],
+  "launch_handler": {
+    "client_mode": [
+      "focus-existing",
+      "auto"
+    ]
+  },
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "note_taking": {
+    "new_note_url": "./index.html?tab=3"
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+phase2",
+      "url": "./index.html?q=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "./index.html",
+      "accept": {
+        "application/json": [
+          ".json"
+        ]
+      }
+    }
+  ],
+  "share_target": {
+    "action": "./index.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
   "icons": [
-    {
-      "src": "./icon.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
     {
       "src": "./icon.png",
       "sizes": "1600x1600",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "./icon.png",
+      "sizes": "1600x1600",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='512' height='512'%3E%3Crect width='512' height='512' rx='115' fill='%23090d16'/%3E%3Ccircle cx='256' cy='256' r='168' fill='none' stroke='%2338bdf8' stroke-width='20'/%3E%3Ctext x='256' y='295' font-family='sans-serif' font-size='135' font-weight='800' fill='%23f8fafc' text-anchor='middle'%3EP2%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192' width='192' height='192'%3E%3Crect width='192' height='192' rx='42' fill='%23090d16'/%3E%3Ccircle cx='96' cy='96' r='64' fill='none' stroke='%2338bdf8' stroke-width='8'/%3E%3Ctext x='96' y='112' font-family='sans-serif' font-size='52' font-weight='800' fill='%23f8fafc' text-anchor='middle'%3EP2%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./icon.png",
+      "sizes": "1600x1600",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Phase 2 Daily Focus & Revision Tracker"
+    },
+    {
+      "src": "./icon.png",
+      "sizes": "1600x1600",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Phase 2 Full 66-Session Revision Companion"
     }
   ],
   "shortcuts": [
@@ -58,7 +118,7 @@
       "icons": [
         {
           "src": "./icon.png",
-          "sizes": "192x192",
+          "sizes": "1600x1600",
           "type": "image/png"
         }
       ]
@@ -71,7 +131,7 @@
       "icons": [
         {
           "src": "./icon.png",
-          "sizes": "192x192",
+          "sizes": "1600x1600",
           "type": "image/png"
         }
       ]
@@ -84,7 +144,7 @@
       "icons": [
         {
           "src": "./icon.png",
-          "sizes": "192x192",
+          "sizes": "1600x1600",
           "type": "image/png"
         }
       ]
