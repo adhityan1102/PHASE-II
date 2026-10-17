@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <link rel="manifest" href="manifest.json">
-  <meta name="apple-mobile-web-app-title" content="PHASE - II">
-  <meta name="application-name" content="PHASE - II">
-  <meta name="theme-color" content="#090d16">
-  <link rel="icon" type="image/svg+xml" href="icon.png">
-  <link rel="apple-touch-icon" href="icon.png">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Phase 2 — Revision Companion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>PHASE - II — Revision Companion</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="application-name" content="PHASE - II" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="PHASE - II" />
+  <meta name="theme-color" id="metaThemeColor" content="#090d16" />
+
+  <link rel="icon" type="image/png" href="icon.png" />
+  <link rel="apple-touch-icon" href="icon.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+
   <style>
     :root[data-theme="dark"] {
       --bg: #090d16;
@@ -59,26 +66,37 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
-    body {
+    input, textarea {
+      user-select: text;
+    }
+
+    html, body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      min-height: 100dvh;
       overflow-x: hidden;
+      overscroll-behavior-y: none;
       transition: background-color 0.25s ease, color 0.25s ease;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
     }
 
     .mono {
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Minimal Top Header */
+    /* Top Minimal Header */
     .app-header {
       max-width: 720px;
       margin: 0 auto;
-      padding: 20px 20px 10px;
+      padding: 18px 20px 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -102,6 +120,22 @@
       font-size: 1.1rem;
       font-weight: 600;
       color: var(--text);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-pill {
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
     }
 
     .icon-btn, .pill-btn {
@@ -190,7 +224,7 @@
       margin: 0 auto;
       overflow: hidden;
       position: relative;
-      padding-bottom: 72px;
+      padding-bottom: 76px;
     }
 
     .swipe-track {
@@ -330,7 +364,7 @@
     /* Subtle Bottom Tab Pill Indicator */
     .bottom-pill-nav {
       position: fixed;
-      bottom: 18px;
+      bottom: calc(18px + env(safe-area-inset-bottom, 0px));
       left: 50%;
       transform: translateX(-50%);
       background: var(--surface-elevated);
@@ -371,7 +405,7 @@
 
     .search-input {
       flex: 1;
-      min-width: 150px;
+      min-width: 140px;
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
@@ -385,7 +419,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      max-height: 66vh;
+      max-height: 65vh;
       overflow-y: auto;
       padding-right: 4px;
     }
@@ -585,19 +619,78 @@
       margin-top: 8px;
       font-size: 0.82rem;
     }
+
+    /* Auto / Manual Theme Switch UI */
+    .switch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+    }
+
+    .switch-toggle {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .switch-toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: var(--border);
+      transition: 0.22s;
+      border-radius: 999px;
+    }
+
+    .switch-slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 4px;
+      bottom: 4px;
+      background-color: var(--text);
+      transition: 0.22s;
+      border-radius: 50%;
+    }
+
+    .switch-toggle input:checked + .switch-slider {
+      background-color: var(--accent);
+    }
+
+    .switch-toggle input:checked + .switch-slider:before {
+      transform: translateX(20px);
+      background-color: #090d16;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Top Minimal Header: Today's Date, Live Clock, Hidden Settings Button -->
+  <!-- Top Minimal Header -->
   <header class="app-header">
     <div class="live-clock-wrap">
       <div class="live-date" id="realDateDisplay">Loading...</div>
       <div class="live-time mono" id="realTimeDisplay">--:--:--</div>
     </div>
-    <button class="icon-btn" id="settingsBtn" title="Settings & Preferences">
-      ⚙️
-    </button>
+    <div class="header-right">
+      <span class="user-pill mono" id="headerUserBadge">Section-★</span>
+      <button class="icon-btn" id="settingsBtn" title="Settings & Logger">
+        ⚙️
+      </button>
+    </div>
   </header>
 
   <!-- Live Next Test Countdown -->
@@ -623,7 +716,7 @@
             <button class="session-card morning" id="morningBigBtn" onclick="openPortionSheet('morning')">
               <div class="slot-top">
                 <span class="slot-badge">☀️ Morning Test</span>
-                <span class="slot-time mono" id="morningTimeLabel">09:00 AM</span>
+                <span class="slot-time mono" id="morningTimeLabel">11:45 AM</span>
               </div>
               <div class="slot-middle">
                 <div class="slot-subject" id="morningSubject">Loading...</div>
@@ -639,7 +732,7 @@
             <button class="session-card evening" id="eveningBigBtn" onclick="openPortionSheet('evening')">
               <div class="slot-top">
                 <span class="slot-badge">🌙 Evening Test</span>
-                <span class="slot-time mono" id="eveningTimeLabel">02:30 PM</span>
+                <span class="slot-time mono" id="eveningTimeLabel">04:15 PM</span>
               </div>
               <div class="slot-middle">
                 <div class="slot-subject" id="eveningSubject">Loading...</div>
@@ -685,15 +778,15 @@
         <div class="timeline-list" id="timelineList"></div>
       </section>
 
-      <!-- TAB 2: GOOGLE DRIVE PDF FOLDER & OFFICIAL EXAM BLUEPRINTS -->
+      <!-- TAB 2: MASTER PDF / GOOGLE DRIVE & OFFICIAL EXAM BLUEPRINTS -->
       <section class="swipe-slide">
         <div class="minimal-card">
-          <h3>📁 Phase-2 Master Google Drive Folder</h3>
-          <p>Link your Google Drive folder containing all Phase-2 PDFs and Funwork sheets for 1-tap access.</p>
+          <h3>📁 Phase-2 Master PDF / Drive Link</h3>
+          <p>Defaults to your baked-in <code>schedule.pdf</code> offline, or paste a Google Drive folder link.</p>
           <div class="input-row">
-            <input type="url" class="search-input" id="masterDriveInput" placeholder="https://drive.google.com/drive/folders/..." />
+            <input type="text" class="search-input" id="masterDriveInput" placeholder="schedule.pdf or https://drive.google.com/..." />
             <button class="pill-btn active" onclick="saveMasterDrive()">Save</button>
-            <button class="pill-btn" onclick="openMasterDrive()">Open ↗</button>
+            <button class="pill-btn" onclick="openMasterDrive()">Open PDF ↗</button>
           </div>
         </div>
 
@@ -775,7 +868,7 @@
           <button class="pill-btn" onclick="openCurrentSessionPdf()">Open PDF ↗</button>
         </div>
         <div class="input-row" style="margin-top:0;">
-          <input type="url" class="search-input" id="sessionPdfInput" placeholder="Paste PDF link..." />
+          <input type="text" class="search-input" id="sessionPdfInput" placeholder="schedule.pdf or custom link..." />
           <input type="number" class="search-input" id="sessionScoreInput" style="max-width:105px;" placeholder="Marks" min="0" max="80" />
           <button class="pill-btn active" onclick="saveSessionMeta()">Save</button>
         </div>
@@ -783,33 +876,49 @@
     </div>
   </div>
 
-  <!-- HIDDEN SETTINGS MODAL (⚙️) -->
+  <!-- HIDDEN SETTINGS & DB LOGGER MODAL (⚙️) -->
   <div class="modal-backdrop" id="settingsModal" onclick="if(event.target===this) closeSettingsModal()">
     <div class="modal-sheet">
       <div class="sheet-header">
         <div>
-          <h2>Settings & Preferences</h2>
-          <p style="font-size:0.8rem; color:var(--text-muted);">Theme, Student Profile, & Test Timings</p>
+          <h2>Settings & User Logger</h2>
+          <p style="font-size:0.8rem; color:var(--text-muted);">Auto/Manual Theme, Section-★ Profile, & Timings</p>
         </div>
         <button class="icon-btn" onclick="closeSettingsModal()">✕</button>
       </div>
 
       <div style="display:flex; flex-direction:column; gap:14px;">
-        <!-- Theme Switcher -->
-        <div style="display:flex; align-items:center; justify-content:space-between;">
-          <span style="font-size:0.86rem; font-weight:600;">Appearance Theme</span>
-          <button class="pill-btn" id="themeToggleBtn" onclick="toggleTheme()">☀️ Warm Cream</button>
+        <!-- Auto / Manual Theme Switch -->
+        <div class="switch-row">
+          <div>
+            <strong style="font-size:0.85rem; display:block;">Auto Daylight Theme</strong>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Warm Cream (6 AM–6 PM) • Obsidian (6 PM–6 AM)</span>
+          </div>
+          <label class="switch-toggle">
+            <input type="checkbox" id="autoThemeSwitch" onchange="handleAutoThemeToggle(this.checked)" />
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+        <!-- Manual Theme Button (Visible only when Auto Switch is OFF) -->
+        <div id="manualThemeControls" style="display:none; align-items:center; justify-content:space-between; padding:0 4px;">
+          <span style="font-size:0.84rem; font-weight:600;">Manual Theme Override</span>
+          <button class="pill-btn" id="themeToggleBtn" onclick="toggleManualTheme()">☀️ Warm Cream</button>
         </div>
 
         <div class="section-divider" style="margin:2px 0;"></div>
 
-        <!-- Student Profile -->
+        <!-- Database-Style User Logger (Name, Email, Section-★) -->
         <div>
-          <label style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:6px;">Student Profile</label>
+          <label style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:6px;">Student Database Record (Format: Section-★)</label>
           <div class="input-row" style="margin-top:0;">
-            <input type="text" class="search-input" id="profileNameInput" placeholder="Name (Adhityan)" />
-            <input type="text" class="search-input" id="profileSectionInput" placeholder="Class / Set (Set D)" />
+            <input type="text" class="search-input" id="profileNameInput" placeholder="Name (e.g., The Rock / Adhityan)" />
+            <input type="email" class="search-input" id="profileEmailInput" placeholder="Email (student@school.edu)" />
           </div>
+          <div class="input-row" style="margin-top:8px;">
+            <input type="text" class="search-input mono" id="profileSectionInput" placeholder="Section-★ (e.g., Section-D)" />
+          </div>
+          <p id="loggerStatsText" class="mono" style="font-size:0.74rem; color:var(--text-muted); margin-top:6px;"></p>
         </div>
 
         <!-- Test Timings -->
@@ -817,23 +926,23 @@
           <label style="font-size:0.8rem; font-weight:600; display:block; margin-bottom:6px;">Test Timings (Countdown & Calendar)</label>
           <div class="input-row" style="margin-top:0;">
             <label style="font-size:0.8rem; display:flex; align-items:center; gap:6px; flex:1;">
-              Morning: <input type="time" class="search-input" id="morningTimeInput" value="09:00" />
+              Morning: <input type="time" class="search-input" id="morningTimeInput" value="11:45" />
             </label>
             <label style="font-size:0.8rem; display:flex; align-items:center; gap:6px; flex:1;">
-              Evening: <input type="time" class="search-input" id="eveningTimeInput" value="14:30" />
+              Evening: <input type="time" class="search-input" id="eveningTimeInput" value="16:15" />
             </label>
           </div>
         </div>
 
-        <button class="pill-btn active" style="justify-content:center; padding:10px;" onclick="saveSettings()">Save Settings</button>
+        <button class="pill-btn active" style="justify-content:center; padding:10px;" onclick="saveSettings()">Save & Log Record</button>
 
         <div class="section-divider" style="margin:2px 0;"></div>
 
         <!-- Backup & Restore -->
         <div style="display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap;">
-          <button class="pill-btn" onclick="exportBackupJSON()">⬇️ Export Backup (.json)</button>
+          <button class="pill-btn" onclick="exportBackupJSON()">⬇️ Export DB (.json)</button>
           <label class="pill-btn" style="cursor:pointer;">
-            ⬆️ Import Backup (.json)
+            ⬆️ Import DB (.json)
             <input type="file" accept=".json" style="display:none;" onchange="importBackupJSON(event)" />
           </label>
         </div>
@@ -877,9 +986,13 @@
 
   <script>
     if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./sw.js')
-    .then(() => console.log('Service Worker Registered!'));
-}
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(() => console.log('Service Worker Registered!'))
+          .catch((err) => console.warn('SW Error:', err));
+      });
+    }
+
     // COMPLETE PHASE-2 SCHEDULE (OCT 15 TO DEC 15, 2026) WITH FAT EXAMS & FUNWORKS MAPPED FROM PDF
     const DEFAULT_SCHEDULE = [
       { "date": "2026-10-15", "day": "Thursday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Study Hour / Funwork Prep", "fat_portion": "Phase-II Preliminary Study Hours" },
@@ -888,7 +1001,7 @@
       { "date": "2026-10-18", "day": "Sunday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Holiday", "fat_portion": "Dasara Festival Break" },
       { "date": "2026-10-19", "day": "Monday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Holiday", "fat_portion": "Dasara Festival Break" },
       { "date": "2026-10-20", "day": "Tuesday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Holiday", "fat_portion": "Dasara Festival Break" },
-      { "date": "2026-10-21", "day": "Wednesday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Day-1 Readiness Check", "fat_portion": " Maths: Real Numbers | Social: Geo-1 & Geo-2" },
+      { "date": "2026-10-21", "day": "Wednesday", "test1_subject": "Dasara Vacation", "test1_portion": "Dasara Vacation (15.10.2026 to 21.10.2026)", "test2_subject": null, "test2_portion": null, "fat_subject": "Day-1 Readiness Check", "fat_portion": "Maths: Real Numbers | Social: Geo-1 & Geo-2" },
       { "date": "2026-10-22", "day": "Thursday", "test1_subject": "Mathematics (Session 1)", "test1_portion": "Real Numbers", "test2_subject": "Social Science (Session 1)", "test2_portion": "Geo-1: Resources and Development | Geo-2: Forest and Wild Life Resources | Map Work: Soil Types, Major Dams", "fat_subject": "Funwork: Maths FW-1 & Social Day-1", "fat_portion": "Maths FW-1: a) Real Numbers, b) Polynomials | Social FW Sheets 1, 2 & 3: Geo-1, Geo-2 & Map WS (Soil Types, Major Dams)" },
       { "date": "2026-10-23", "day": "Friday", "test1_subject": "Physics (Session 1)", "test1_portion": "Light - Reflection", "test2_subject": "English (Session 1)", "test2_portion": "Reading: Discursive & Case Based Factual Passages | Grammar: Q. No. I & II | Writing: Complaint Letter, Excerpts, Product Based | Literature: Prose - A Letter to God, Poem - Dust of Snow & Fire and Ice", "fat_subject": "Funwork: Physics FW-I & English FW-1", "fat_portion": "Physics Fun Worksheet-I: Light - Reflection and Refraction | English Funwork 1: Reading & Grammar Q. I-II" },
       { "date": "2026-10-24", "day": "Saturday", "test1_subject": "Chemistry (Session 1)", "test1_portion": "Chemical reactions and equations Part 1, 2, 3 (Challengers SET D: Part 2, 3)", "test2_subject": "Tamil (Session 1)", "test2_portion": "இயல் - 1: உரைநடை: பாவாணர் பார்வையில் தமிழ்ச்சொல் வளம் (2x5=10) | செய்யுள்: அன்னை மொழியே, காலக்கணிதம் (3x4=12) | செய்யுள்வரி வினாவிடை (3x1=3)", "fat_subject": "Funwork: Chemistry Day-1 & Tamil FW-1", "fat_portion": "Chemistry: Chemical reactions and equations - Worksheet 1 (FAT-1 Syllabus) | Tamil FW-1: பத்தி வினா" },
@@ -946,23 +1059,45 @@
       { "date": "2026-12-15", "day": "Tuesday", "test1_subject": "Answer Script Analysis & Remedial", "test1_portion": "Complete Analysis and Remedial Session", "test2_subject": null, "test2_portion": null, "fat_subject": "Phase-2 Complete", "fat_portion": "Review Pre-Final 2 Performance" }
     ];
 
+    function normalizeEveningTime(t) {
+      if (!t || t === '04:15') return '16:15';
+      return t;
+    }
+
+    function formatSectionStar(raw) {
+      if (!raw) return 'Section-★';
+      const cleaned = raw.trim();
+      if (cleaned.startsWith('Section-')) return cleaned;
+      return `Section-${cleaned.replace(/^section[\s-]*/i, '') || '★'}`;
+    }
+
     let state = {
-      theme: localStorage.getItem('p2_theme') || 'dark',
+      autoTheme: localStorage.getItem('p2_auto_theme') !== 'false', // Default ON
+      manualTheme: localStorage.getItem('p2_theme') || 'dark',
+      theme: 'dark',
       schedule: JSON.parse(localStorage.getItem('p2_schedule_v2')) || DEFAULT_SCHEDULE,
       checks: JSON.parse(localStorage.getItem('p2_checks')) || {},
       meta: JSON.parse(localStorage.getItem('p2_meta')) || {},
       masterDrive: localStorage.getItem('p2_master_drive') || 'schedule.pdf',
       morningTime: localStorage.getItem('p2_morning_time') || '11:45',
-      eveningTime: localStorage.getItem('p2_evening_time') || '04:15',
+      eveningTime: normalizeEveningTime(localStorage.getItem('p2_evening_time')),
       vault: JSON.parse(localStorage.getItem('p2_vault')) || [],
-      profile: JSON.parse(localStorage.getItem('p2_profile')) || { name: 'The Rock', section: '10th X' },
+      profile: JSON.parse(localStorage.getItem('p2_profile')) || {
+        uid: 'USR-' + Date.now().toString(36).toUpperCase(),
+        name: 'The Rock',
+        email: '',
+        section: 'Section-★',
+        sessionsOpened: 0,
+        lastActive: null
+      },
       activeTab: 0,
       selectedDate: '',
       activeSheetSlot: 'morning'
     };
 
     function saveState() {
-      localStorage.setItem('p2_theme', state.theme);
+      localStorage.setItem('p2_auto_theme', state.autoTheme);
+      localStorage.setItem('p2_theme', state.manualTheme);
       localStorage.setItem('p2_schedule_v2', JSON.stringify(state.schedule));
       localStorage.setItem('p2_checks', JSON.stringify(state.checks));
       localStorage.setItem('p2_meta', JSON.stringify(state.meta));
@@ -984,16 +1119,52 @@
       return toLocalISODate(new Date());
     }
 
-    function applyTheme() {
-      document.documentElement.setAttribute('data-theme', state.theme);
-      const btn = document.getElementById('themeToggleBtn');
-      if (btn) btn.textContent = state.theme === 'dark' ? '☀️ Warm Cream' : '🌙 Obsidian Dark';
+    // Automatic (Time of Day) + Manual Theme Engine
+    function computeEffectiveTheme() {
+      if (state.autoTheme) {
+        const hour = new Date().getHours();
+        return (hour >= 6 && hour < 18) ? 'cream' : 'dark';
+      }
+      return state.manualTheme;
     }
 
-    function toggleTheme() {
-      state.theme = state.theme === 'dark' ? 'cream' : 'dark';
+    function applyTheme() {
+      state.theme = computeEffectiveTheme();
+      document.documentElement.setAttribute('data-theme', state.theme);
+
+      const metaTheme = document.getElementById('metaThemeColor');
+      if (metaTheme) {
+        metaTheme.setAttribute('content', state.theme === 'dark' ? '#090d16' : '#faf6ee');
+      }
+
+      const switchEl = document.getElementById('autoThemeSwitch');
+      if (switchEl) switchEl.checked = state.autoTheme;
+
+      const manualWrap = document.getElementById('manualThemeControls');
+      if (manualWrap) manualWrap.style.display = state.autoTheme ? 'none' : 'flex';
+
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) btn.textContent = state.manualTheme === 'dark' ? '☀️ Warm Cream' : '🌙 Obsidian Dark';
+    }
+
+    function handleAutoThemeToggle(checked) {
+      state.autoTheme = checked;
       applyTheme();
       saveState();
+    }
+
+    function toggleManualTheme() {
+      state.manualTheme = state.manualTheme === 'dark' ? 'cream' : 'dark';
+      applyTheme();
+      saveState();
+    }
+
+    function renderUserHeaderBadge() {
+      const badge = document.getElementById('headerUserBadge');
+      if (!badge) return;
+      const sec = formatSectionStar(state.profile.section);
+      const namePart = state.profile.name ? `${state.profile.name} • ` : '';
+      badge.textContent = `${namePart}${sec}`;
     }
 
     function isRealTestSubject(subj) {
@@ -1004,6 +1175,12 @@
 
     function updateClockAndCountdown() {
       const now = new Date();
+
+      if (state.autoTheme) {
+        const expected = computeEffectiveTheme();
+        if (expected !== state.theme) applyTheme();
+      }
+
       const activeRec = getDayRecord(state.selectedDate);
       const isViewingToday = state.selectedDate === getRealTodayISO();
 
@@ -1266,9 +1443,8 @@
 
     function openCurrentSessionPdf() {
       const metaKey = `${state.selectedDate}_${state.activeSheetSlot}`;
-      const url = state.meta[metaKey]?.pdf || state.masterDrive;
-      if (url) window.open(url, '_blank');
-      else alert('Paste a PDF link below or save your Master Google Drive link in Tab 3 first.');
+      const url = state.meta[metaKey]?.pdf || state.masterDrive || 'schedule.pdf';
+      window.open(url, '_blank');
     }
 
     // Tab 1: Schedule List
@@ -1381,15 +1557,15 @@
       window.open(`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dClean}T033000Z/${dClean}T113000Z&details=${details}`, '_blank');
     }
 
-    // Tab 2: Master Drive
+    // Tab 2: Master Drive / PDF
     function saveMasterDrive() {
-      state.masterDrive = document.getElementById('masterDriveInput').value.trim();
+      state.masterDrive = document.getElementById('masterDriveInput').value.trim() || 'schedule.pdf';
       saveState();
     }
 
     function openMasterDrive() {
-      if (state.masterDrive) window.open(state.masterDrive, '_blank');
-      else alert('Paste your Google Drive folder link first.');
+      const target = state.masterDrive || 'schedule.pdf';
+      window.open(target, '_blank');
     }
 
     // Tab 3: Simulator Timer & Error Vault
@@ -1463,12 +1639,19 @@
       renderVault();
     }
 
-    // Settings Modal (⚙️)
+    // Settings & DB Logger Modal (⚙️)
     document.getElementById('settingsBtn').addEventListener('click', () => {
       document.getElementById('profileNameInput').value = state.profile.name || '';
-      document.getElementById('profileSectionInput').value = state.profile.section || '';
+      document.getElementById('profileEmailInput').value = state.profile.email || '';
+      document.getElementById('profileSectionInput').value = formatSectionStar(state.profile.section);
       document.getElementById('morningTimeInput').value = state.morningTime;
       document.getElementById('eveningTimeInput').value = state.eveningTime;
+
+      const totalCompleted = Object.values(state.checks).filter(Boolean).length;
+      document.getElementById('loggerStatsText').textContent =
+        `UID: ${state.profile.uid || 'LOCAL'} • Sessions Logged: ${state.profile.sessionsOpened || 1} • Topics Checked: ${totalCompleted}`;
+
+      applyTheme();
       document.getElementById('settingsModal').classList.add('open');
     });
 
@@ -1477,13 +1660,18 @@
     }
 
     function saveSettings() {
+      const formattedSec = formatSectionStar(document.getElementById('profileSectionInput').value);
       state.profile = {
-        name: document.getElementById('profileNameInput').value.trim() || 'Adhityan',
-        section: document.getElementById('profileSectionInput').value.trim() || 'X - CBSE'
+        ...state.profile,
+        name: document.getElementById('profileNameInput').value.trim() || 'The Rock',
+        email: document.getElementById('profileEmailInput').value.trim(),
+        section: formattedSec,
+        lastActive: new Date().toISOString()
       };
-      state.morningTime = document.getElementById('morningTimeInput').value || '09:00';
-      state.eveningTime = document.getElementById('eveningTimeInput').value || '14:30';
+      state.morningTime = document.getElementById('morningTimeInput').value || '11:45';
+      state.eveningTime = document.getElementById('eveningTimeInput').value || '16:15';
       saveState();
+      renderUserHeaderBadge();
       renderFocusDay();
       updateClockAndCountdown();
       closeSettingsModal();
@@ -1493,7 +1681,7 @@
       const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `phase2_backup_${getRealTodayISO()}.json`;
+      a.download = `phase2_db_${getRealTodayISO()}.json`;
       a.click();
     }
 
@@ -1516,16 +1704,35 @@
     }
 
     function initApp() {
+      state.profile.sessionsOpened = (state.profile.sessionsOpened || 0) + 1;
+      state.profile.section = formatSectionStar(state.profile.section);
+      state.profile.lastActive = new Date().toISOString();
+      saveState();
+
       applyTheme();
-      state.selectedDate = getRealTodayISO();
-      document.getElementById('masterDriveInput').value = state.masterDrive;
+      renderUserHeaderBadge();
+      state.selectedDate = getRealTodayISO() || '2026-10-22';
+
+      const driveInput = document.getElementById('masterDriveInput');
+      if (driveInput) driveInput.value = state.masterDrive;
+
       renderFocusDay();
       renderTimeline();
       renderVault();
       updateClockAndCountdown();
+
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get('tab');
+      if (tabParam !== null && !isNaN(Number(tabParam))) {
+        goToTab(Number(tabParam));
+      }
     }
 
-    initApp();
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      initApp();
+    } else {
+      window.addEventListener('DOMContentLoaded', initApp);
+    }
     setInterval(updateClockAndCountdown, 1000);
   </script>
 </body>
