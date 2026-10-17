@@ -11,7 +11,8 @@
   "display": "standalone",
   "display_override": [
     "window-controls-overlay",
-    "standalone"
+    "standalone",
+    "tabbed"
   ],
   "orientation": "portrait",
   "background_color": "#090d16",
@@ -23,10 +24,42 @@
   ],
   "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7",
   "prefer_related_applications": false,
-  "related_applications": [],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://adhityan1102.github.io/PHASE-II/manifest.json"
+    }
+  ],
   "scope_extensions": [
     {
+      "type": "origin",
       "origin": "https://adhityan1102.github.io"
+    }
+  ],
+  "widgets": [
+    {
+      "name": "Phase 2 Daily Focus",
+      "short_name": "Phase 2",
+      "description": "Quickly view today's Morning, Evening, and FAT revision sessions.",
+      "tag": "phase2-focus",
+      "ms_ac_template": "./widget-template.json",
+      "data": "./widget-data.json",
+      "type": "application/json",
+      "screenshots": [
+        {
+          "src": "./icon.png",
+          "sizes": "1600x1600",
+          "label": "Phase 2 Widget Preview"
+        }
+      ],
+      "icons": [
+        {
+          "src": "./icon.png",
+          "sizes": "1600x1600"
+        }
+      ],
+      "auth": false,
+      "update": 3600
     }
   ],
   "launch_handler": {
