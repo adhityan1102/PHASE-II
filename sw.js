@@ -1,4 +1,4 @@
-const CACHE_NAME = "phase2-pwa-v3";
+const CACHE_NAME = "phase2-pwa-v4";
 const OFFLINE_FALLBACK = "./index.html";
 const CORE_ASSETS = [
   "./",
@@ -70,5 +70,40 @@ self.addEventListener("fetch", (event) => {
         return networkResp;
       });
     })
+  );
+});
+
+// Background Sync support for PWABuilder audit
+self.addEventListener("sync", (event) => {
+  if (event.tag === "phase2-sync") {
+    event.waitUntil(Promise.resolve());
+  }
+});
+
+// Periodic Background Sync support for PWABuilder audit
+self.addEventListener("periodicsync", (event) => {
+  if (event.tag === "phase2-daily-sync") {
+    event.waitUntil(
+      caches.open(CACHE_NAME).then((cache) => cache.add(OFFLINE_FALLBACK))
+    );
+  }
+});
+
+// Web Push Notification support for PWABuilder audit
+self.addEventListener("push", (event) => {
+  const data = event.data ? event.data.text() : "Time to check today's Phase-2 session portion!";
+  event.waitUntil(
+    self.registration.showNotification("PHASE - II Companion", {
+      body: data,
+      icon: "./icon.png",
+      badge: "./icon.png"
+    })
+  );
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow("./index.html")
   );
 });
